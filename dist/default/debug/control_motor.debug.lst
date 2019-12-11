@@ -1,0 +1,633 @@
+
+
+Microchip MPLAB XC8 Assembler V2.10 build 88905656 
+                                                                                               Wed Dec 11 00:02:32 2019
+
+Microchip MPLAB XC8 C Compiler v2.10 (Free license) build 20190730164152 Og1 
+     1                           	processor	18F4431
+     2                           	fnconf	rparam,??,?,0
+     3                           	opt	pw 120
+     4                           	opt	flic
+     5                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     6                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,noexec
+     7                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     8                           	psect	text1,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    11                           	psect	intcodelo,global,reloc=2,class=CODE,delta=1
+    12                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    13                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    14                           	psect	temp,global,ovrld,common,class=COMRAM,space=1,delta=1
+    15  0000                     
+    16                           ; Version 2.10
+    17                           ; Generated 31/07/2019 GMT
+    18                           ; 
+    19                           ; Copyright © 2019, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    20                           ; All rights reserved.
+    21                           ; 
+    22                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    23                           ; 
+    24                           ; Redistribution and use in source and binary forms, with or without modification, are
+    25                           ; permitted provided that the following conditions are met:
+    26                           ; 
+    27                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    28                           ;        conditions and the following disclaimer.
+    29                           ; 
+    30                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    31                           ;        of conditions and the following disclaimer in the documentation and/or other
+    32                           ;        materials provided with the distribution.
+    33                           ; 
+    34                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    35                           ;        software without specific prior written permission.
+    36                           ; 
+    37                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    38                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    39                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    40                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    41                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    42                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    43                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    44                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    45                           ; 
+    46                           ; 
+    47                           ; Code-generator required, PIC18F4431 Definitions
+    48                           ; 
+    49                           ; SFR Addresses
+    50  0000                     _OVDCONS	set	3946
+    51  0000                     _OVDCOND	set	3947
+    52  0000                     _PDC0L	set	3961
+    53  0000                     _PDC0H	set	3960
+    54  0000                     _PTPERL	set	3963
+    55  0000                     _PTPERH	set	3962
+    56  0000                     _PWMCON1bits	set	3950
+    57  0000                     _PWMCON0bits	set	3951
+    58  0000                     _PTCON1bits	set	3966
+    59  0000                     _PTCON0bits	set	3967
+    60  0000                     _PORTB	set	3969
+    61  0000                     _TRISB	set	3987
+    62  0000                     _LATB	set	3978
+    63  0000                     _PIR3bits	set	4004
+    64  0000                     _PIE3bits	set	4003
+    65  0000                     _INTCONbits	set	4082
+    66                           
+    67                           ; #config settings
+    68  0000                     
+    69                           	psect	cinit
+    70  00008A                     __pcinit:
+    71                           	opt callstack 0
+    72  00008A                     start_initialization:
+    73                           	opt callstack 0
+    74  00008A                     __initialization:
+    75                           	opt callstack 0
+    76  00008A                     end_of_initialization:
+    77                           	opt callstack 0
+    78  00008A                     __end_of__initialization:
+    79                           	opt callstack 0
+    80  00008A  9002               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
+    81  00008C  9202               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+    82  00008E  0100               	movlb	0
+    83  000090  EF3B  F000         	goto	_main	;jump to C main() function
+    84                           
+    85                           	psect	cstackCOMRAM
+    86  000001                     __pcstackCOMRAM:
+    87                           	opt callstack 0
+    88  000001                     ??_tcInt:
+    89                           
+    90                           ; 1 bytes @ 0x0
+    91  000001                     	ds	1
+    92  000002                     
+    93                           ; 1 bytes @ 0x1
+    94 ;;
+    95 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+    96 ;;
+    97 ;; *************** function _main *****************
+    98 ;; Defined at:
+    99 ;;		line 229 in file "newmain.c"
+   100 ;; Parameters:    Size  Location     Type
+   101 ;;		None
+   102 ;; Auto vars:     Size  Location     Type
+   103 ;;		None
+   104 ;; Return value:  Size  Location     Type
+   105 ;;                  1    wreg      void 
+   106 ;; Registers used:
+   107 ;;		wreg, status,2, cstack
+   108 ;; Tracked objects:
+   109 ;;		On entry : 0/0
+   110 ;;		On exit  : 0/0
+   111 ;;		Unchanged: 0/0
+   112 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+   113 ;;      Params:         0       0       0       0
+   114 ;;      Locals:         0       0       0       0
+   115 ;;      Temps:          0       0       0       0
+   116 ;;      Totals:         0       0       0       0
+   117 ;;Total ram usage:        0 bytes
+   118 ;; Hardware stack levels required when called:    2
+   119 ;; This function calls:
+   120 ;;		_configureInterrupts
+   121 ;;		_configurePWM
+   122 ;;		_startPWM
+   123 ;; This function is called by:
+   124 ;;		Startup code after reset
+   125 ;; This function uses a non-reentrant model
+   126 ;;
+   127                           
+   128                           	psect	text0
+   129  000076                     __ptext0:
+   130                           	opt callstack 0
+   131  000076                     _main:
+   132                           	opt callstack 29
+   133  000076                     
+   134                           ;newmain.c: 231:     configureInterrupts();
+   135  000076  EC4A  F000         	call	_configureInterrupts	;wreg free
+   136  00007A                     
+   137                           ;newmain.c: 232:     configurePWM();
+   138  00007A  EC1D  F000         	call	_configurePWM	;wreg free
+   139  00007E                     
+   140                           ;newmain.c: 233:     startPWM();
+   141  00007E  EC4E  F000         	call	_startPWM	;wreg free
+   142  000082                     l49:
+   143  000082  EF41  F000         	goto	l49
+   144  000086  EF1B  F000         	goto	start
+   145  00008A                     __end_of_main:
+   146                           	opt callstack 0
+   147                           
+   148 ;; *************** function _startPWM *****************
+   149 ;; Defined at:
+   150 ;;		line 190 in file "newmain.c"
+   151 ;; Parameters:    Size  Location     Type
+   152 ;;		None
+   153 ;; Auto vars:     Size  Location     Type
+   154 ;;		None
+   155 ;; Return value:  Size  Location     Type
+   156 ;;                  1    wreg      void 
+   157 ;; Registers used:
+   158 ;;		None
+   159 ;; Tracked objects:
+   160 ;;		On entry : 0/0
+   161 ;;		On exit  : 0/0
+   162 ;;		Unchanged: 0/0
+   163 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+   164 ;;      Params:         0       0       0       0
+   165 ;;      Locals:         0       0       0       0
+   166 ;;      Temps:          0       0       0       0
+   167 ;;      Totals:         0       0       0       0
+   168 ;;Total ram usage:        0 bytes
+   169 ;; Hardware stack levels used:    1
+   170 ;; Hardware stack levels required when called:    1
+   171 ;; This function calls:
+   172 ;;		Nothing
+   173 ;; This function is called by:
+   174 ;;		_main
+   175 ;; This function uses a non-reentrant model
+   176 ;;
+   177                           
+   178                           	psect	text1
+   179  00009C                     __ptext1:
+   180                           	opt callstack 0
+   181  00009C                     _startPWM:
+   182                           	opt callstack 29
+   183  00009C                     
+   184                           ;newmain.c: 191:     PTCON1bits.PTEN = 1;
+   185  00009C  8E7E               	bsf	126,7,c	;volatile
+   186  00009E  0012               	return		;funcret
+   187  0000A0                     __end_of_startPWM:
+   188                           	opt callstack 0
+   189                           
+   190 ;; *************** function _configurePWM *****************
+   191 ;; Defined at:
+   192 ;;		line 85 in file "newmain.c"
+   193 ;; Parameters:    Size  Location     Type
+   194 ;;		None
+   195 ;; Auto vars:     Size  Location     Type
+   196 ;;		None
+   197 ;; Return value:  Size  Location     Type
+   198 ;;                  1    wreg      void 
+   199 ;; Registers used:
+   200 ;;		wreg, status,2
+   201 ;; Tracked objects:
+   202 ;;		On entry : 0/0
+   203 ;;		On exit  : 0/0
+   204 ;;		Unchanged: 0/0
+   205 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+   206 ;;      Params:         0       0       0       0
+   207 ;;      Locals:         0       0       0       0
+   208 ;;      Temps:          0       0       0       0
+   209 ;;      Totals:         0       0       0       0
+   210 ;;Total ram usage:        0 bytes
+   211 ;; Hardware stack levels used:    1
+   212 ;; Hardware stack levels required when called:    1
+   213 ;; This function calls:
+   214 ;;		Nothing
+   215 ;; This function is called by:
+   216 ;;		_main
+   217 ;; This function uses a non-reentrant model
+   218 ;;
+   219                           
+   220                           	psect	text2
+   221  00003A                     __ptext2:
+   222                           	opt callstack 0
+   223  00003A                     _configurePWM:
+   224                           	opt callstack 29
+   225  00003A                     
+   226                           ;newmain.c: 86:     LATB = 0;
+   227  00003A  0E00               	movlw	0
+   228  00003C  6E8A               	movwf	138,c	;volatile
+   229                           
+   230                           ;newmain.c: 87:     TRISB = 0;
+   231  00003E  0E00               	movlw	0
+   232  000040  6E93               	movwf	147,c	;volatile
+   233                           
+   234                           ;newmain.c: 88:     PORTB = 0;
+   235  000042  0E00               	movlw	0
+   236  000044  6E81               	movwf	129,c	;volatile
+   237  000046                     
+   238                           ;newmain.c: 98:     PTCON0bits.PTMOD0 = 0;
+   239  000046  907F               	bcf	127,0,c	;volatile
+   240  000048                     
+   241                           ;newmain.c: 99:     PTCON0bits.PTMOD1 = 0;
+   242  000048  927F               	bcf	127,1,c	;volatile
+   243  00004A                     
+   244                           ;newmain.c: 112:     PTCON1bits.PTEN = 0;
+   245  00004A  9E7E               	bcf	126,7,c	;volatile
+   246  00004C                     
+   247                           ;newmain.c: 113:     PTCON1bits.PTDIR = 0;
+   248  00004C  9C7E               	bcf	126,6,c	;volatile
+   249  00004E                     
+   250                           ;newmain.c: 140:     PWMCON0bits.PWMEN2 = 1;
+   251  00004E  8C6F               	bsf	111,6,c	;volatile
+   252  000050                     
+   253                           ;newmain.c: 141:     PWMCON0bits.PWMEN1 = 0;
+   254  000050  9A6F               	bcf	111,5,c	;volatile
+   255  000052                     
+   256                           ;newmain.c: 142:     PWMCON0bits.PWMEN0 = 0;
+   257  000052  986F               	bcf	111,4,c	;volatile
+   258  000054                     
+   259                           ;newmain.c: 144:     PWMCON0bits.PMOD0 = 0;
+   260  000054  906F               	bcf	111,0,c	;volatile
+   261  000056                     
+   262                           ;newmain.c: 145:     PWMCON0bits.PMOD1 = 0;
+   263  000056  926F               	bcf	111,1,c	;volatile
+   264  000058                     
+   265                           ;newmain.c: 146:     PWMCON0bits.PMOD2 = 0;
+   266  000058  946F               	bcf	111,2,c	;volatile
+   267  00005A                     
+   268                           ;newmain.c: 154:     PWMCON1bits.UDIS = 0;
+   269  00005A  926E               	bcf	110,1,c	;volatile
+   270  00005C                     
+   271                           ;newmain.c: 155:     PWMCON1bits.OSYNC = 1;
+   272  00005C  806E               	bsf	110,0,c	;volatile
+   273                           
+   274                           ;newmain.c: 160:     PTPERH = 0x01;
+   275  00005E  0E01               	movlw	1
+   276  000060  6E7A               	movwf	122,c	;volatile
+   277                           
+   278                           ;newmain.c: 161:     PTPERL = 0xF3;
+   279  000062  0EF3               	movlw	243
+   280  000064  6E7B               	movwf	123,c	;volatile
+   281                           
+   282                           ;newmain.c: 167:     PDC0H = 0x00;
+   283  000066  0E00               	movlw	0
+   284  000068  6E78               	movwf	120,c	;volatile
+   285                           
+   286                           ;newmain.c: 168:     PDC0L = 0xC1;
+   287  00006A  0EC1               	movlw	193
+   288  00006C  6E79               	movwf	121,c	;volatile
+   289  00006E                     
+   290                           ;newmain.c: 177:     OVDCOND = 0xff;
+   291  00006E  686B               	setf	107,c	;volatile
+   292                           
+   293                           ;newmain.c: 187:     OVDCONS = 0;
+   294  000070  0E00               	movlw	0
+   295  000072  6E6A               	movwf	106,c	;volatile
+   296  000074  0012               	return		;funcret
+   297  000076                     __end_of_configurePWM:
+   298                           	opt callstack 0
+   299                           
+   300 ;; *************** function _configureInterrupts *****************
+   301 ;; Defined at:
+   302 ;;		line 198 in file "newmain.c"
+   303 ;; Parameters:    Size  Location     Type
+   304 ;;		None
+   305 ;; Auto vars:     Size  Location     Type
+   306 ;;		None
+   307 ;; Return value:  Size  Location     Type
+   308 ;;                  1    wreg      void 
+   309 ;; Registers used:
+   310 ;;		None
+   311 ;; Tracked objects:
+   312 ;;		On entry : 0/0
+   313 ;;		On exit  : 0/0
+   314 ;;		Unchanged: 0/0
+   315 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+   316 ;;      Params:         0       0       0       0
+   317 ;;      Locals:         0       0       0       0
+   318 ;;      Temps:          0       0       0       0
+   319 ;;      Totals:         0       0       0       0
+   320 ;;Total ram usage:        0 bytes
+   321 ;; Hardware stack levels used:    1
+   322 ;; Hardware stack levels required when called:    1
+   323 ;; This function calls:
+   324 ;;		Nothing
+   325 ;; This function is called by:
+   326 ;;		_main
+   327 ;; This function uses a non-reentrant model
+   328 ;;
+   329                           
+   330                           	psect	text3
+   331  000094                     __ptext3:
+   332                           	opt callstack 0
+   333  000094                     _configureInterrupts:
+   334                           	opt callstack 29
+   335  000094                     
+   336                           ;newmain.c: 218:     INTCONbits.GIE = 1;
+   337  000094  8EF2               	bsf	242,7,c	;volatile
+   338                           
+   339                           ;newmain.c: 219:     INTCONbits.PEIE = 1;
+   340  000096  8CF2               	bsf	242,6,c	;volatile
+   341                           
+   342                           ;newmain.c: 226:     PIE3bits.PTIE = 1;
+   343  000098  88A3               	bsf	163,4,c	;volatile
+   344  00009A  0012               	return		;funcret
+   345  00009C                     __end_of_configureInterrupts:
+   346                           	opt callstack 0
+   347                           
+   348 ;; *************** function _tcInt *****************
+   349 ;; Defined at:
+   350 ;;		line 243 in file "newmain.c"
+   351 ;; Parameters:    Size  Location     Type
+   352 ;;		None
+   353 ;; Auto vars:     Size  Location     Type
+   354 ;;		None
+   355 ;; Return value:  Size  Location     Type
+   356 ;;                  1    wreg      void 
+   357 ;; Registers used:
+   358 ;;		None
+   359 ;; Tracked objects:
+   360 ;;		On entry : 0/0
+   361 ;;		On exit  : 0/0
+   362 ;;		Unchanged: 0/0
+   363 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2
+   364 ;;      Params:         0       0       0       0
+   365 ;;      Locals:         0       0       0       0
+   366 ;;      Temps:          1       0       0       0
+   367 ;;      Totals:         1       0       0       0
+   368 ;;Total ram usage:        1 bytes
+   369 ;; Hardware stack levels used:    1
+   370 ;; This function calls:
+   371 ;;		Nothing
+   372 ;; This function is called by:
+   373 ;;		Interrupt level 1
+   374 ;; This function uses a non-reentrant model
+   375 ;;
+   376                           
+   377                           	psect	intcodelo
+   378  000018                     __pintcodelo:
+   379                           	opt callstack 0
+   380  000018                     _tcInt:
+   381                           	opt callstack 29
+   382                           
+   383                           ;incstack = 0
+   384  000018  8002               	bsf	int$flags,0,c	;set compiler interrupt flag (level 1)
+   385  00001A  CFE0 F001          	movff	bsr,??_tcInt
+   386  00001E                     
+   387                           ;newmain.c: 244:     if (PIR3bits.PTIF) {
+   388  00001E  A8A4               	btfss	164,4,c	;volatile
+   389  000020  EF14  F000         	goto	i1u1_21
+   390  000024  EF16  F000         	goto	i1u1_20
+   391  000028                     i1u1_21:
+   392  000028  EF17  F000         	goto	i1l58
+   393  00002C                     i1u1_20:
+   394  00002C                     
+   395                           ;newmain.c: 245:         PIR3bits.PTIF = 0;
+   396  00002C  98A4               	bcf	164,4,c	;volatile
+   397  00002E                     i1l58:
+   398  00002E  C001  FFE0         	movff	??_tcInt,bsr
+   399  000032  9002               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
+   400  000034  0010               	retfie	
+   401  000036                     __end_of_tcInt:
+   402                           	opt callstack 0
+   403  0000                     
+   404                           	psect	rparam
+   405  0000                     
+   406                           	psect	temp
+   407  000002                     btemp:
+   408                           	opt callstack 0
+   409  000002                     	ds	1
+   410  0000                     int$flags	set	btemp
+   411  0000                     wtemp8	set	btemp+1
+   412  0000                     ttemp5	set	btemp+1
+   413  0000                     ttemp6	set	btemp+4
+   414  0000                     ttemp7	set	btemp+8
+   415                           tosu	equ	0xFFF
+   416                           tosh	equ	0xFFE
+   417                           tosl	equ	0xFFD
+   418                           stkptr	equ	0xFFC
+   419                           pclatu	equ	0xFFB
+   420                           pclath	equ	0xFFA
+   421                           pcl	equ	0xFF9
+   422                           tblptru	equ	0xFF8
+   423                           tblptrh	equ	0xFF7
+   424                           tblptrl	equ	0xFF6
+   425                           tablat	equ	0xFF5
+   426                           prodh	equ	0xFF4
+   427                           prodl	equ	0xFF3
+   428                           indf0	equ	0xFEF
+   429                           postinc0	equ	0xFEE
+   430                           postdec0	equ	0xFED
+   431                           preinc0	equ	0xFEC
+   432                           plusw0	equ	0xFEB
+   433                           fsr0h	equ	0xFEA
+   434                           fsr0l	equ	0xFE9
+   435                           wreg	equ	0xFE8
+   436                           indf1	equ	0xFE7
+   437                           postinc1	equ	0xFE6
+   438                           postdec1	equ	0xFE5
+   439                           preinc1	equ	0xFE4
+   440                           plusw1	equ	0xFE3
+   441                           fsr1h	equ	0xFE2
+   442                           fsr1l	equ	0xFE1
+   443                           bsr	equ	0xFE0
+   444                           indf2	equ	0xFDF
+   445                           postinc2	equ	0xFDE
+   446                           postdec2	equ	0xFDD
+   447                           preinc2	equ	0xFDC
+   448                           plusw2	equ	0xFDB
+   449                           fsr2h	equ	0xFDA
+   450                           fsr2l	equ	0xFD9
+   451                           status	equ	0xFD8
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           94      1       1
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           239      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    None.
+
+Critical Paths under _tcInt in COMRAM
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _tcInt in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _tcInt in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _tcInt in BANK2
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 0     0      0       0
+                _configureInterrupts
+                       _configurePWM
+                           _startPWM
+ ---------------------------------------------------------------------------------
+ (1) _startPWM                                             0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _configurePWM                                         0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _configureInterrupts                                  0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (2) _tcInt                                                1     1      0       0
+                                              0 COMRAM     1     1      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _configureInterrupts
+   _configurePWM
+   _startPWM
+
+ _tcInt (ROOT)
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5E      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5E      1       1       1        1.1%
+STACK                0      0       0       2        0.0%
+BITBANK0            A0      0       0       3        0.0%
+BANK0               A0      0       0       4        0.0%
+ABS                  0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2            EF      0       0       8        0.0%
+BANK2               EF      0       0       9        0.0%
+BIGRAM             2EE      0       0      10        0.0%
+DATA                 0      0       0      11        0.0%
+BITSFR_5             0      0       0     200        0.0%
+SFR_5                0      0       0     200        0.0%
+BITSFR_4             0      0       0     200        0.0%
+SFR_4                0      0       0     200        0.0%
+BITSFR_3             0      0       0     200        0.0%
+SFR_3                0      0       0     200        0.0%
+BITSFR_2             0      0       0     200        0.0%
+SFR_2                0      0       0     200        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.10 build 88905656 
+Symbol Table                                                                                   Wed Dec 11 00:02:32 2019
+
+               ?_configurePWM 0001                            l50 0082                            l35 0074  
+                          l44 009A                            l38 009E                            l49 0082  
+                          bsr 000FE0                  __CFG_CP0$OFF 000000                  __CFG_CP1$OFF 000000  
+                __CFG_CP2$OFF 000000                  __CFG_CP3$OFF 000000                           l740 004A  
+                         l750 0054                           l742 004C                           l734 003A  
+                         l760 006E                           l752 0056                           l744 004E  
+                         l736 0046                           l754 0058                           l746 0050  
+                         l738 0048                           l762 009C                           l770 007A  
+                         l764 0094                           l756 005A                           l748 0052  
+                         l772 007E                           l758 005C                           l768 0076  
+                __CFG_CPB$OFF 000000                  __CFG_CPD$OFF 000000                  __CFG_IESO$ON 000000  
+                __CFG_LVP$OFF 000000                          _LATB 000F8A                          i1l58 002E  
+               __CFG_FCMEN$ON 000000                          _main 0076                          btemp 0002  
+               __CFG_BOREN$ON 000000                          start 0036                 __CFG_MCLRE$ON 000000  
+              ??_configurePWM 0002                  ___param_bank 000000                         ?_main 0001  
+                       _PDC0H 000F78                         _PDC0L 000F79                         i1l774 001E  
+                       i1l776 002C                         _PORTB 000F81                         _TRISB 000F93  
+               __CFG_WRT0$OFF 000000                 __CFG_WRT1$OFF 000000                 __CFG_WRT2$OFF 000000  
+               __CFG_WRT3$OFF 000000                __CFG_EBTR0$OFF 000000                __CFG_EBTR1$OFF 000000  
+              __CFG_EBTR2$OFF 000000                __CFG_EBTR3$OFF 000000                 __CFG_WRTB$OFF 000000  
+               __CFG_WRTC$OFF 000000                 __CFG_WRTD$OFF 000000                __CFG_EBTRB$OFF 000000  
+                       _tcInt 0018                         ttemp5 0003                         ttemp6 0006  
+                       ttemp7 000A                         wtemp8 0003               __initialization 008A  
+              __CFG_HPOL$HIGH 000000                  __end_of_main 008A   __end_of_configureInterrupts 009C  
+              __CFG_OSC$HSPLL 000000                __CFG_LPOL$HIGH 000000                        ??_main 0002  
+               __activetblptr 000000                        ?_tcInt 0001                __CFG_WDTEN$OFF 000000  
+              __CFG_WINEN$OFF 000000                        i1u1_20 002C                        i1u1_21 0028  
+                      _PTPERH 000F7A                        _PTPERL 000F7B                __CFG_PWRTEN$ON 000000  
+              __CFG_SSPMX$RC7 000000                __CFG_STVREN$ON 000000              __end_of_startPWM 00A0  
+        __end_of_configurePWM 0076                    __accesstop 0060       __end_of__initialization 008A  
+             __CFG_FLTAMX$RC1 000000                 ___rparam_used 000001               __CFG_T1OSCMX$ON 000000  
+              __pcstackCOMRAM 0001                 __end_of_tcInt 0036                       ??_tcInt 0001  
+             __CFG_WDPS$32768 000000               __CFG_PWM4MX$RB5 000000                       _OVDCOND 000F6B  
+                     _OVDCONS 000F6A               __CFG_PWMPIN$OFF 000000                       __Hparam 0000  
+                     __Lparam 0000                     ?_startPWM 0001                       __pcinit 008A  
+                     __ramtop 0300                       __ptext0 0076                       __ptext1 009C  
+                     __ptext2 003A                       __ptext3 0094         __size_of_configurePWM 003C  
+        end_of_initialization 008A                  _configurePWM 003A                    ??_startPWM 0002  
+__size_of_configureInterrupts 0008              __CFG_EXCLKMX$RC3 000000           start_initialization 008A  
+                 __pintcodelo 0018             __size_of_startPWM 0004                __size_of_tcInt 001E  
+                    _PIE3bits 000FA3                      _PIR3bits 000FA4           _configureInterrupts 0094  
+        ?_configureInterrupts 0001                      __Hrparam 0000                      __Lrparam 0000  
+       ??_configureInterrupts 0002                 __size_of_main 0014                      int$flags 0002  
+                    _startPWM 009C                    _INTCONbits 000FF2                      intlevel1 0000  
+                 _PWMCON0bits 000F6F                   _PWMCON1bits 000F6E                    _PTCON0bits 000F7F  
+                  _PTCON1bits 000F7E  

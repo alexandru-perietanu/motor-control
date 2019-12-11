@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Title of the document</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+        var ctx;
+        var iterationStep = Math.PI * 2 / 255;
+        var pointsArray = [];
+        var count = 0;
+
+        function start() {
+            var canvas = document.getElementsByTagName("canvas")[0];
+            var ctx = canvas.getContext("2d");
+
+            for (var i = 0; i < Math.PI * 2; i += iterationStep) {
+                pointsArray.push(Math.floor(Math.sin(i) * 127 + 128));
+                ctx.beginPath();
+                ctx.arc(count, pointsArray[pointsArray.length - 1], 5, 0, 2 * Math.PI);
+                ctx.stroke();
+                count++;
+            }
+
+            console.log(pointsArray);
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <canvas height="500"></canvas>
+</body>
+
+</html>

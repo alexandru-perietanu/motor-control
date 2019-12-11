@@ -1,0 +1,88 @@
+[p GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F4431 ]
+[d frameptr 4065 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"86 E:\facultate\electronica\an4\an1\EA\control motor\newmain.c
+[v _configurePWM configurePWM `(v  1 e 1 0 ]
+"164
+[v _startPWM startPWM `(v  1 e 1 0 ]
+"172
+[v _main main `(v  1 e 1 0 ]
+"693 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4431.h
+[v _PWMCON1 PWMCON1 `VEuc  1 e 1 @3950 ]
+"759
+[v _PWMCON0 PWMCON0 `VEuc  1 e 1 @3951 ]
+"899
+[v _PTPERH PTPERH `VEuc  1 e 1 @3962 ]
+"906
+[v _PTPERL PTPERL `VEuc  1 e 1 @3963 ]
+"913
+[v _PTMRH PTMRH `VEuc  1 e 1 @3964 ]
+"920
+[v _PTMRL PTMRL `VEuc  1 e 1 @3965 ]
+"927
+[v _PTCON1 PTCON1 `VEuc  1 e 1 @3966 ]
+"954
+[v _PTCON0 PTCON0 `VEuc  1 e 1 @3967 ]
+"8632
+[v _PMOD0 PMOD0 `VEb  1 e 0 @31608 ]
+"8635
+[v _PMOD1 PMOD1 `VEb  1 e 0 @31609 ]
+"8638
+[v _PMOD2 PMOD2 `VEb  1 e 0 @31610 ]
+"8704
+[v _PTDIR PTDIR `VEb  1 e 0 @31734 ]
+"8707
+[v _PTEN PTEN `VEb  1 e 0 @31735 ]
+"8719
+[v _PTMOD0 PTMOD0 `VEb  1 e 0 @31736 ]
+"8722
+[v _PTMOD1 PTMOD1 `VEb  1 e 0 @31737 ]
+"8737
+[v _PWMEN0 PWMEN0 `VEb  1 e 0 @31612 ]
+"8740
+[v _PWMEN1 PWMEN1 `VEb  1 e 0 @31613 ]
+"8743
+[v _PWMEN2 PWMEN2 `VEb  1 e 0 @31614 ]
+"9526
+[v _UDIS UDIS `VEb  1 e 0 @31601 ]
+"172 E:\facultate\electronica\an4\an1\EA\control motor\newmain.c
+[v _main main `(v  1 e 1 0 ]
+{
+"184
+} 0
+"164
+[v _startPWM startPWM `(v  1 e 1 0 ]
+{
+"166
+} 0
+"86
+[v _configurePWM configurePWM `(v  1 e 1 0 ]
+{
+"162
+} 0

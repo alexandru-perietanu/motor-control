@@ -226,10 +226,35 @@ void configureInterrupts() {
     PIE3bits.PTIE = 1;
 }
 
+void configureADC() {
+    //continous
+    ADCON0bits.ACONV = 1;
+    ADCON1 = 0;
+    //The A/D acquisition time is set to 12Tad
+    ADCON2bits.ACQT2 = 1;
+    ADCON2bits.ACQT1 = 1;
+    
+    // Fosc / 32
+    ADCON2bits.ADCS1 = 1;
+    
+    //An interrupt is generated on every 2nd and 4th write to the FIFO buffer.
+    ADCON3bits.ADRS0 = 1;
+            
+    ANSEL0bits.ANS0 = 1;
+    TRISAbits.TRISA0 = 1;
+    
+    ADCON0bits.ACMOD0 = 1;
+    PIE1bits.ADIE = 1;
+    ADCON0bits.ADON = 0;
+    PIR1bits.ADIF = 0;
+    
+}
+
 void main(void) {
 
     configureInterrupts();
     configurePWM();
+   // configureADC();
     startPWM();
     //stopPWM();
 

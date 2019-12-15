@@ -82,11 +82,29 @@
 #include <xc.h>
 #include "pic18f4431.h"
 
+const int sinusValues[256] = {960, 982, 1004, 1026, 1049, 1071, 1093, 1115, 1137, 1160, 1182, 1211, 1234, 1248, 1271, 1293, 1315, 1337, 1359, 1382, 1404, 1419, 1441, 1463, 1478, 1500, 1515, 1537, 1552, 1574, 1589, 1604, 1626, 1641, 1655, 1670, 1685, 1700, 1715, 1729, 1737, 1752, 1766, 1774, 1789, 1796, 1811, 1818, 1826, 1833, 1840, 1848, 1855, 1863, 1870, 1877, 1877, 1885, 1885, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1885, 1885, 1877, 1877, 1870, 1863, 1863, 1855, 1848, 1840, 1833, 1818, 1811, 1803, 1789, 1781, 1766, 1759, 1744, 1729, 1722, 1707, 1692, 1678, 1663, 1648, 1633, 1611, 1596, 1581, 1567, 1544, 1530, 1507, 1493, 1470, 1448, 1433, 1411, 1389, 1367, 1352, 1330, 1308, 1285, 1263, 1241, 1219, 1197, 1174, 1152, 1130, 1108, 1086, 1063, 1034, 1012, 989, 967, 945, 923, 901, 878, 849, 827, 804, 782, 760, 738, 716, 693, 671, 649, 627, 605, 582, 560, 545, 523, 501, 479, 464, 442, 420, 405, 383, 368, 346, 331, 316, 301, 279, 264, 249, 235, 220, 205, 190, 183, 168, 153, 146, 131, 124, 109, 101, 94, 79, 72, 64, 57, 50, 50, 42, 35, 35, 27, 27, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 27, 27, 35, 35, 42, 50, 57, 64, 72, 79, 87, 94, 101, 116, 124, 138, 146, 161, 175, 183, 198, 212, 227, 242, 257, 272, 286, 309, 323, 338, 360, 375, 397, 412, 434, 449, 471, 494, 508, 531, 553, 575, 597, 619, 642, 664, 679, 701, 730, 753, 775, 797, 819, 841, 864, 886, 908, 930, 952};
+const unsigned int timer0PreloadValues[101] = {60652, 60701, 60750, 60799, 60848, 60897, 60946, 60995, 61044, 61093, 61142, 61191, 61240, 61289, 61338, 61387, 61436, 61485, 61534, 61583, 61633, 61682, 61731, 61780, 61829, 61878, 61927, 61976, 62025, 62074, 62123, 62172, 62221, 62270, 62319, 62368, 62417, 62466, 62515, 62564, 62614, 62663, 62712, 62761, 62810, 62859, 62908, 62957, 63006, 63055, 63104, 63153, 63202, 63251, 63300, 63349, 63398, 63447, 63496, 63545, 63595, 63644, 63693, 63742, 63791, 63840, 63889, 63938, 63987, 64036, 64085, 64134, 64183, 64232, 64281, 64330, 64379, 64428, 64477, 64526, 64576, 64625, 64674, 64723, 64772, 64821, 64870, 64919, 64968, 65017, 65066, 65115, 65164, 65213, 65262, 65311, 65360, 65409, 65458, 65508, 65508};
+
+volatile unsigned int adcPercent = 0;
+volatile unsigned int prevAdcPercent = 101;
+unsigned int maxADCVal = 0xFF;
+volatile unsigned long dutyCycle = 0;
+volatile unsigned char sinusIndex1 = 0;
+volatile unsigned char sinusIndex2 = 0x55;
+volatile unsigned char sinusIndex3 = 0xAA;
+//volatile char d1 = 1;
+//char sinusVales[256] = {128, 131, 134, 137, 140, 143, 146, 149, 152, 155, 158, 162, 165, 167, 170, 173, 176, 179, 182, 185, 188, 190, 193, 196, 198, 201, 203, 206, 208, 211, 213, 215, 218, 220, 222, 224, 226, 228, 230, 232, 233, 235, 237, 238, 240, 241, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 252, 253, 253, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 253, 253, 252, 252, 251, 250, 250, 249, 248, 247, 246, 244, 243, 242, 240, 239, 237, 236, 234, 232, 231, 229, 227, 225, 223, 221, 219, 216, 214, 212, 210, 207, 205, 202, 200, 197, 194, 192, 189, 186, 183, 181, 178, 175, 172, 169, 166, 163, 160, 157, 154, 151, 148, 145, 142, 138, 135, 132, 129, 126, 123, 120, 117, 113, 110, 107, 104, 101, 98, 95, 92, 89, 86, 83, 80, 77, 74, 72, 69, 66, 63, 61, 58, 55, 53, 50, 48, 45, 43, 41, 39, 36, 34, 32, 30, 28, 26, 24, 23, 21, 19, 18, 16, 15, 13, 12, 11, 9, 8, 7, 6, 5, 5, 4, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 17, 18, 20, 22, 23, 25, 27, 29, 31, 33, 35, 37, 40, 42, 44, 47, 49, 52, 54, 57, 59, 62, 65, 67, 70, 73, 76, 79, 82, 85, 88, 90, 93, 97, 100, 103, 106, 109, 112, 115, 118, 121, 124, 127};
+
+unsigned int timer0ReloadMin = 60652; // pt 1Hz
+unsigned int timer0ReloadMax = 65508; // pt 100Hz
+volatile unsigned int timer0ReloadValue = 60652;
+volatile unsigned char PrevADRESH = 0;
+
 void configurePWM() {
     LATB = 0;
     TRISB = 0;
     PORTB = 0;
-    
+
     /*PTCON0: PWM TIMER CONTROL REGISTER 0*/
     /*
         PTMOD1:PTMOD0: PWM Time Base Mode Select bits
@@ -163,10 +181,11 @@ void configurePWM() {
 
     //PTMRH = 0x00;
     //PTMRL = 0xFF;
-    
+
     PDC0H = 0x00;
-    PDC0L = 0xC1;
-    
+    PDC0L = 0x13;
+    PIE3bits.PTIE = 1;
+
     /*
      * OVDCOND: OUTPUT OVERRIDE CONTROL REGISTER
      * POVD7:POVD0: PWM Output Override bits(1)
@@ -194,6 +213,10 @@ void startPWM() {
 void stopPWM() {
     PTCON1bits.PTEN = 0;
 }
+
+//unsigned int map(unsigned int x, unsigned int in_min, unsigned int in_max, unsigned int out_min, unsigned int out_max) {
+//    return (x - in_min) * ((out_max - out_min) / (in_max - in_min)) + out_min;
+//}
 
 void configureInterrupts() {
     /*INTCON REGISTER*/
@@ -223,38 +246,65 @@ void configureInterrupts() {
         1 = PTIF enabled
         0 = PTIF disabled
      */
-    PIE3bits.PTIE = 1;
+
 }
 
 void configureADC() {
     //continous
     ADCON0bits.ACONV = 1;
+    ADCON0bits.ACSCH = 0;
+    ADCON0bits.ACMOD1 = 0;
+    ADCON0bits.ACMOD0 = 0;
+
     ADCON1 = 0;
     //The A/D acquisition time is set to 12Tad
     ADCON2bits.ACQT2 = 1;
     ADCON2bits.ACQT1 = 1;
-    
-    // Fosc / 32
+
+    // Fosc / 64
+    ADCON2bits.ADCS2 = 1;
     ADCON2bits.ADCS1 = 1;
-    
+
     //An interrupt is generated on every 2nd and 4th write to the FIFO buffer.
-    ADCON3bits.ADRS0 = 1;
-            
+    ADCON3bits.ADRS1 = 1;
+
+    ADCHSbits.GASEL1 = 0;
+    ADCHSbits.GASEL0 = 0;
+
     ANSEL0bits.ANS0 = 1;
     TRISAbits.TRISA0 = 1;
-    
-    ADCON0bits.ACMOD0 = 1;
+
+    // ADC __interrupt enable/disable
     PIE1bits.ADIE = 1;
-    ADCON0bits.ADON = 0;
+
+    ADCON0bits.ADON = 1;
     PIR1bits.ADIF = 0;
-    
+    ADCON0bits.GODONE = 1;
+}
+
+void configureTimer0() {
+    //    TMR0L = 0x0B;
+    //    TMR0H = 0x74;
+
+    T0CONbits.PSA = 0;
+    T0CONbits.T0SE = 0;
+    T0CONbits.T0CS = 0;
+    T0CONbits.T016BIT = 0;
+    INTCONbits.TMR0IE = 1;
+    T0CONbits.TMR0ON = 1;
+    T0CONbits.T0PS0 = 0;
+    T0CONbits.T0PS1 = 1;
+    T0CONbits.T0PS2 = 0;
+    TMR0 = timer0ReloadValue;
+    TRISDbits.RD1 = 0;
 }
 
 void main(void) {
 
     configureInterrupts();
     configurePWM();
-   // configureADC();
+    configureADC();
+    configureTimer0();
     startPWM();
     //stopPWM();
 
@@ -268,5 +318,60 @@ void main(void) {
 void __interrupt(low_priority) tcInt(void) {
     if (PIR3bits.PTIF) {
         PIR3bits.PTIF = 0;
+    }
+    if (PIR1bits.ADIF) {
+        PIR1bits.ADIF = 0;
+        //unsigned int adcVal = (ADRESH << 8) | ADRES;
+        //unsigned long partial = (unsigned long)(ADRES * 100);
+        //prevAdcPercent = adcPercent;
+
+        if (PrevADRESH != ADRESH) {
+            adcPercent = (255 - ADRESH) * 100 / maxADCVal;
+            timer0ReloadValue = timer0PreloadValues[adcPercent];
+        //timer0ReloadValue = map(adcPercent, 0, 100, timer0ReloadMin, timer0ReloadMax);
+        //timer0ReloadValue = (unsigned long)(adcPercent * 4850) / 100 + 60652;
+         }
+        PrevADRESH = ADRESH;
+        //dutyCycle = 13 + 1900 - (19 * adcPercent);
+        //unsigned char duty = (dutyCycle >> 8);
+        //PDC0H = duty;
+        //PDC0L = dutyCycle;
+
+        NOP();
+    }
+    if (INTCONbits.T0IF) {
+        INTCONbits.T0IF = 0;
+        if (sinusIndex1 == 255) {
+            sinusIndex1 = 0;
+        }
+        if (sinusIndex2 == 255) {
+            sinusIndex2 = 0;
+        }
+        if (sinusIndex3 == 255) {
+            sinusIndex3 = 0;
+        }
+
+        //dutyCycle = sinusVales[sinusIndex] * (1900 - 13) / 255 + 13;
+        unsigned char duty = (sinusValues[sinusIndex1] >> 8);
+        PDC0H = duty;
+        PDC0L = sinusValues[sinusIndex1];
+
+        duty = (sinusValues[sinusIndex2] >> 8);
+        PDC1H = duty;
+        PDC1L = sinusValues[sinusIndex2];
+
+        duty = (sinusValues[sinusIndex3] >> 8);
+        PDC2H = duty;
+        PDC2L = sinusValues[sinusIndex3];
+
+
+        TMR0 = timer0ReloadValue;
+
+        //        PORTDbits.RD1 = d1;
+        //        d1 = !d1;
+
+        sinusIndex1++;
+        sinusIndex2++;
+        sinusIndex3++;
     }
 }

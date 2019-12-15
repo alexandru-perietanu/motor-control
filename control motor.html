@@ -9,21 +9,43 @@
         var iterationStep = Math.PI * 2 / 255;
         var pointsArray = [];
         var count = 0;
+        var s2;
 
         function start() {
             var canvas = document.getElementsByTagName("canvas")[0];
             var ctx = canvas.getContext("2d");
-
+            var s = "";
             for (var i = 0; i < Math.PI * 2; i += iterationStep) {
                 pointsArray.push(Math.floor(Math.sin(i) * 127 + 128));
+
+                s += (Math.floor(pointsArray[pointsArray.length - 1] * (1900 - 13) / 255 + 13)) + ", ";
+
                 ctx.beginPath();
                 ctx.arc(count, pointsArray[pointsArray.length - 1], 5, 0, 2 * Math.PI);
                 ctx.stroke();
                 count++;
             }
 
-            console.log(pointsArray);
+            console.log(pointsArray.join(", "));
+            console.log(s);
 
+            var minVal = 60652;
+            var maxVal = 65508;
+            s2 = "";
+            for (var i = 0; i < 100; i++) {
+                if (i < 99) {
+                    s2 += Math.floor(map(i, 0, 99, minVal, maxVal)) + ", ";
+                } else {
+                    s2 += Math.floor(map(i, 0, 99, minVal, maxVal));
+                }
+                    
+            }
+            console.log(s2);
+
+            function map(x, in_min, in_max, out_min, out_max) {
+                return (x - in_min) * ((out_max - out_min) / (in_max - in_min)) + out_min;
+            }
+            
 
         }
     </script>

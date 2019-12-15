@@ -10,9 +10,9 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/control_motor.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=control_motor.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=controlmotor/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/motor-control.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=motor-control.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=motor-control/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/controlmotor/bin
+makeDirectory ${TMPDIR}/motor-control/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/controlmotor.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/motor-control.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/controlmotor.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/motor-control.tar *
 checkReturnCode
 
 # Cleanup

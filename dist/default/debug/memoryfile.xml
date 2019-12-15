@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-  <executable name="dist/default/debug\control_motor.debug.hex">
+  <executable name="dist/default/debug\motor-control.debug.hex">
     <memory name="program">
       <units>bytes</units>
       <length>16384</length>
-      <used>140</used>
-      <free>16244</free>
+      <used>1576</used>
+      <free>14808</free>
     </memory>
     <memory name="data">
       <units>bytes</units>
       <length>768</length>
-      <used>2</used>
-      <free>766</free>
+      <used>40</used>
+      <free>728</free>
     </memory>
   </executable>
 </project>

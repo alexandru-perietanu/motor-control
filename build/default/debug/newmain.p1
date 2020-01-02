@@ -349,7 +349,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "19
 [p x FCMEN = ON ]
 "20
-[p x IESO = ON ]
+[p x IESO = OFF ]
 "23
 [p x PWRTEN = ON ]
 "24
@@ -363,9 +363,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "33
 [p x PWMPIN = OFF ]
 "34
-[p x LPOL = HIGH ]
+[p x LPOL = LOW ]
 "35
-[p x HPOL = HIGH ]
+[p x HPOL = LOW ]
 "36
 [p x T1OSCMX = ON ]
 "39
@@ -377,7 +377,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 "42
 [p x EXCLKMX = RC3 ]
 "43
-[p x MCLRE = ON ]
+[p x MCLRE = OFF ]
 "46
 [p x STVREN = ON ]
 "47
@@ -1360,13 +1360,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 "93
-[; ;newmain.c: 93: volatile unsigned char sinusIndex2 = 0x55;
+[; ;newmain.c: 93: volatile unsigned char sinusIndex2 = 85;
 [v _sinusIndex2 `Vuc ~T0 @X0 1 e ]
 [i _sinusIndex2
 -> -> 85 `i `uc
 ]
 "94
-[; ;newmain.c: 94: volatile unsigned char sinusIndex3 = 0xAA;
+[; ;newmain.c: 94: volatile unsigned char sinusIndex3 = 170;
 [v _sinusIndex3 `Vuc ~T0 @X0 1 e ]
 [i _sinusIndex3
 -> -> 170 `i `uc

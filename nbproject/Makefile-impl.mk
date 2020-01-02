@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=motor-control
+PROJECTNAME=control motor
 
 # Active Configuration
 DEFAULTCONF=default

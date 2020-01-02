@@ -17,7 +17,7 @@
 // CONFIG1H
 #pragma config OSC = HSPLL      // Oscillator Selection bits (HS oscillator, PLL enabled (clock frequency = 4 x FOSC1))
 #pragma config FCMEN = ON       // Fail-Safe Clock Monitor Enable bit (Fail-Safe Clock Monitor enabled)
-#pragma config IESO = ON        // Internal External Oscillator Switchover bit (Internal External Switchover mode enabled)
+#pragma config IESO = OFF        // Internal External Oscillator Switchover bit (Internal External Switchover mode enabled)
 
 // CONFIG2L
 #pragma config PWRTEN = ON      // Power-up Timer Enable bit (PWRT enabled)
@@ -31,8 +31,8 @@
 
 // CONFIG3L
 #pragma config PWMPIN = OFF     // PWM output pins Reset state control (PWM outputs disabled upon Reset (default))
-#pragma config LPOL = HIGH      // Low-Side Transistors Polarity (PWM0, 2, 4 and 6 are active-high)
-#pragma config HPOL = HIGH      // High-Side Transistors Polarity (PWM1, 3, 5 and 7 are active-high)
+#pragma config LPOL = LOW      // Low-Side Transistors Polarity (PWM0, 2, 4 and 6 are active-high)
+#pragma config HPOL = LOW      // High-Side Transistors Polarity (PWM1, 3, 5 and 7 are active-high)
 #pragma config T1OSCMX = ON     // Timer1 Oscillator MUX (Low-power Timer1 operation when microcontroller is in Sleep mode)
 
 // CONFIG3H
@@ -40,7 +40,7 @@
 #pragma config SSPMX = RC7      // SSP I/O MUX bit (SCK/SCL clocks and SDA/SDI data are multiplexed with RC5 and RC4, respectively. SDO output is multiplexed with RC7.)
 #pragma config PWM4MX = RB5     // PWM4 MUX bit (PWM4 output is multiplexed with RB5)
 #pragma config EXCLKMX = RC3    // TMR0/T5CKI External clock MUX bit (TMR0/T5CKI external clock input is multiplexed with RC3)
-#pragma config MCLRE = ON       // MCLR Pin Enable bit (Enabled)
+#pragma config MCLRE = OFF       // MCLR Pin Enable bit (Enabled)
 
 // CONFIG4L
 #pragma config STVREN = ON      // Stack Full/Underflow Reset Enable bit (Stack full/underflow will cause Reset)
@@ -90,8 +90,8 @@ volatile unsigned int prevAdcPercent = 101;
 unsigned int maxADCVal = 0xFF;
 volatile unsigned long dutyCycle = 0;
 volatile unsigned char sinusIndex1 = 0;
-volatile unsigned char sinusIndex2 = 0x55;
-volatile unsigned char sinusIndex3 = 0xAA;
+volatile unsigned char sinusIndex2 = 85;
+volatile unsigned char sinusIndex3 = 170;
 //volatile char d1 = 1;
 //char sinusVales[256] = {128, 131, 134, 137, 140, 143, 146, 149, 152, 155, 158, 162, 165, 167, 170, 173, 176, 179, 182, 185, 188, 190, 193, 196, 198, 201, 203, 206, 208, 211, 213, 215, 218, 220, 222, 224, 226, 228, 230, 232, 233, 235, 237, 238, 240, 241, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 252, 253, 253, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 253, 253, 252, 252, 251, 250, 250, 249, 248, 247, 246, 244, 243, 242, 240, 239, 237, 236, 234, 232, 231, 229, 227, 225, 223, 221, 219, 216, 214, 212, 210, 207, 205, 202, 200, 197, 194, 192, 189, 186, 183, 181, 178, 175, 172, 169, 166, 163, 160, 157, 154, 151, 148, 145, 142, 138, 135, 132, 129, 126, 123, 120, 117, 113, 110, 107, 104, 101, 98, 95, 92, 89, 86, 83, 80, 77, 74, 72, 69, 66, 63, 61, 58, 55, 53, 50, 48, 45, 43, 41, 39, 36, 34, 32, 30, 28, 26, 24, 23, 21, 19, 18, 16, 15, 13, 12, 11, 9, 8, 7, 6, 5, 5, 4, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 17, 18, 20, 22, 23, 25, 27, 29, 31, 33, 35, 37, 40, 42, 44, 47, 49, 52, 54, 57, 59, 62, 65, 67, 70, 73, 76, 79, 82, 85, 88, 90, 93, 97, 100, 103, 106, 109, 112, 115, 118, 121, 124, 127};
 

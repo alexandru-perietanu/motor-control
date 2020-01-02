@@ -10,7 +10,7 @@
 # 18 "newmain.c"
 #pragma config OSC = HSPLL
 #pragma config FCMEN = ON
-#pragma config IESO = ON
+#pragma config IESO = OFF
 
 
 #pragma config PWRTEN = ON
@@ -24,8 +24,8 @@
 
 
 #pragma config PWMPIN = OFF
-#pragma config LPOL = HIGH
-#pragma config HPOL = HIGH
+#pragma config LPOL = LOW
+#pragma config HPOL = LOW
 #pragma config T1OSCMX = ON
 
 
@@ -33,7 +33,7 @@
 #pragma config SSPMX = RC7
 #pragma config PWM4MX = RB5
 #pragma config EXCLKMX = RC3
-#pragma config MCLRE = ON
+#pragma config MCLRE = OFF
 
 
 #pragma config STVREN = ON
@@ -5195,8 +5195,8 @@ volatile unsigned int prevAdcPercent = 101;
 unsigned int maxADCVal = 0xFF;
 volatile unsigned long dutyCycle = 0;
 volatile unsigned char sinusIndex1 = 0;
-volatile unsigned char sinusIndex2 = 0x55;
-volatile unsigned char sinusIndex3 = 0xAA;
+volatile unsigned char sinusIndex2 = 85;
+volatile unsigned char sinusIndex3 = 170;
 
 
 

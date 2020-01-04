@@ -33,7 +33,7 @@
 #pragma config SSPMX = RC7
 #pragma config PWM4MX = RB5
 #pragma config EXCLKMX = RC3
-#pragma config MCLRE = OFF
+#pragma config MCLRE = ON
 
 
 #pragma config STVREN = ON
@@ -5186,9 +5186,267 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 82 "newmain.c" 2
 
 
+# 1 "./lcd.h" 1
+# 39 "./lcd.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 1 3
+# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 127 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uintptr_t;
+# 142 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long intptr_t;
+# 158 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef signed char int8_t;
+
+
+
+
+typedef short int16_t;
+# 173 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long int32_t;
+
+
+
+
+
+typedef long long int64_t;
+# 188 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long intmax_t;
+
+
+
+
+
+typedef unsigned char uint8_t;
+
+
+
+
+typedef unsigned short uint16_t;
+# 209 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uint32_t;
+
+
+
+
+
+typedef unsigned long long uint64_t;
+# 229 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long long uintmax_t;
+# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
+
+
+typedef int8_t int_fast8_t;
+
+typedef int64_t int_fast64_t;
+
+
+typedef int8_t int_least8_t;
+typedef int16_t int_least16_t;
+
+typedef int24_t int_least24_t;
+
+typedef int32_t int_least32_t;
+
+typedef int64_t int_least64_t;
+
+
+typedef uint8_t uint_fast8_t;
+
+typedef uint64_t uint_fast64_t;
+
+
+typedef uint8_t uint_least8_t;
+typedef uint16_t uint_least16_t;
+
+typedef uint24_t uint_least24_t;
+
+typedef uint32_t uint_least32_t;
+
+typedef uint64_t uint_least64_t;
+# 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/stdint.h" 1 3
+typedef int32_t int_fast16_t;
+typedef int32_t int_fast32_t;
+typedef uint32_t uint_fast16_t;
+typedef uint32_t uint_fast32_t;
+# 139 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdint.h" 2 3
+# 40 "./lcd.h" 2
+# 124 "./lcd.h"
+    void LCD_Initialize(void);
+# 142 "./lcd.h"
+    void LCDPutChar(uint8_t ch);
+# 160 "./lcd.h"
+    void LCDPutCmd(uint8_t ch);
+# 178 "./lcd.h"
+    void LCDPutStr(const char *);
+# 196 "./lcd.h"
+    void LCDWriteNibble(uint8_t ch, uint8_t rs);
+# 218 "./lcd.h"
+    void LCDGoto(uint8_t pos, uint8_t ln);
+# 84 "newmain.c" 2
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 1 3
+# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 1 3
+
+
+
+
+
+typedef void * va_list[1];
+
+
+
+
+typedef void * __isoc_va_list[1];
+# 137 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long ssize_t;
+# 246 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long off_t;
+# 399 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef struct _IO_FILE FILE;
+# 24 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 2 3
+# 52 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.10\\pic\\include\\c99\\stdio.h" 3
+typedef union _G_fpos64_t {
+ char __opaque[16];
+ double __align;
+} fpos_t;
+
+extern FILE *const stdin;
+extern FILE *const stdout;
+extern FILE *const stderr;
+
+
+
+
+
+FILE *fopen(const char *restrict, const char *restrict);
+FILE *freopen(const char *restrict, const char *restrict, FILE *restrict);
+int fclose(FILE *);
+
+int remove(const char *);
+int rename(const char *, const char *);
+
+int feof(FILE *);
+int ferror(FILE *);
+int fflush(FILE *);
+void clearerr(FILE *);
+
+int fseek(FILE *, long, int);
+long ftell(FILE *);
+void rewind(FILE *);
+
+int fgetpos(FILE *restrict, fpos_t *restrict);
+int fsetpos(FILE *, const fpos_t *);
+
+size_t fread(void *restrict, size_t, size_t, FILE *restrict);
+size_t fwrite(const void *restrict, size_t, size_t, FILE *restrict);
+
+int fgetc(FILE *);
+int getc(FILE *);
+int getchar(void);
+int ungetc(int, FILE *);
+
+int fputc(int, FILE *);
+int putc(int, FILE *);
+int putchar(int);
+
+char *fgets(char *restrict, int, FILE *restrict);
+
+char *gets(char *);
+
+
+int fputs(const char *restrict, FILE *restrict);
+int puts(const char *);
+
+#pragma printf_check(printf) const
+#pragma printf_check(vprintf) const
+#pragma printf_check(sprintf) const
+#pragma printf_check(snprintf) const
+#pragma printf_check(vsprintf) const
+#pragma printf_check(vsnprintf) const
+
+int printf(const char *restrict, ...);
+int fprintf(FILE *restrict, const char *restrict, ...);
+int sprintf(char *restrict, const char *restrict, ...);
+int snprintf(char *restrict, size_t, const char *restrict, ...);
+
+int vprintf(const char *restrict, __isoc_va_list);
+int vfprintf(FILE *restrict, const char *restrict, __isoc_va_list);
+int vsprintf(char *restrict, const char *restrict, __isoc_va_list);
+int vsnprintf(char *restrict, size_t, const char *restrict, __isoc_va_list);
+
+int scanf(const char *restrict, ...);
+int fscanf(FILE *restrict, const char *restrict, ...);
+int sscanf(const char *restrict, const char *restrict, ...);
+int vscanf(const char *restrict, __isoc_va_list);
+int vfscanf(FILE *restrict, const char *restrict, __isoc_va_list);
+int vsscanf(const char *restrict, const char *restrict, __isoc_va_list);
+
+void perror(const char *);
+
+int setvbuf(FILE *restrict, char *restrict, int, size_t);
+void setbuf(FILE *restrict, char *restrict);
+
+char *tmpnam(char *);
+FILE *tmpfile(void);
+
+
+
+
+FILE *fmemopen(void *restrict, size_t, const char *restrict);
+FILE *open_memstream(char **, size_t *);
+FILE *fdopen(int, const char *);
+FILE *popen(const char *, const char *);
+int pclose(FILE *);
+int fileno(FILE *);
+int fseeko(FILE *, off_t, int);
+off_t ftello(FILE *);
+int dprintf(int, const char *restrict, ...);
+int vdprintf(int, const char *restrict, __isoc_va_list);
+void flockfile(FILE *);
+int ftrylockfile(FILE *);
+void funlockfile(FILE *);
+int getc_unlocked(FILE *);
+int getchar_unlocked(void);
+int putc_unlocked(int, FILE *);
+int putchar_unlocked(int);
+ssize_t getdelim(char **restrict, size_t *restrict, int, FILE *restrict);
+ssize_t getline(char **restrict, size_t *restrict, FILE *restrict);
+int renameat(int, const char *, int, const char *);
+char *ctermid(char *);
+
+
+
+
+
+
+
+char *tempnam(const char *, const char *);
+# 86 "newmain.c" 2
+
+
+
+
 
 const int sinusValues[256] = {960, 982, 1004, 1026, 1049, 1071, 1093, 1115, 1137, 1160, 1182, 1211, 1234, 1248, 1271, 1293, 1315, 1337, 1359, 1382, 1404, 1419, 1441, 1463, 1478, 1500, 1515, 1537, 1552, 1574, 1589, 1604, 1626, 1641, 1655, 1670, 1685, 1700, 1715, 1729, 1737, 1752, 1766, 1774, 1789, 1796, 1811, 1818, 1826, 1833, 1840, 1848, 1855, 1863, 1870, 1877, 1877, 1885, 1885, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1885, 1885, 1877, 1877, 1870, 1863, 1863, 1855, 1848, 1840, 1833, 1818, 1811, 1803, 1789, 1781, 1766, 1759, 1744, 1729, 1722, 1707, 1692, 1678, 1663, 1648, 1633, 1611, 1596, 1581, 1567, 1544, 1530, 1507, 1493, 1470, 1448, 1433, 1411, 1389, 1367, 1352, 1330, 1308, 1285, 1263, 1241, 1219, 1197, 1174, 1152, 1130, 1108, 1086, 1063, 1034, 1012, 989, 967, 945, 923, 901, 878, 849, 827, 804, 782, 760, 738, 716, 693, 671, 649, 627, 605, 582, 560, 545, 523, 501, 479, 464, 442, 420, 405, 383, 368, 346, 331, 316, 301, 279, 264, 249, 235, 220, 205, 190, 183, 168, 153, 146, 131, 124, 109, 101, 94, 79, 72, 64, 57, 50, 50, 42, 35, 35, 27, 27, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 27, 27, 35, 35, 42, 50, 57, 64, 72, 79, 87, 94, 101, 116, 124, 138, 146, 161, 175, 183, 198, 212, 227, 242, 257, 272, 286, 309, 323, 338, 360, 375, 397, 412, 434, 449, 471, 494, 508, 531, 553, 575, 597, 619, 642, 664, 679, 701, 730, 753, 775, 797, 819, 841, 864, 886, 908, 930, 952};
-const unsigned int timer0PreloadValues[101] = {60652, 60701, 60750, 60799, 60848, 60897, 60946, 60995, 61044, 61093, 61142, 61191, 61240, 61289, 61338, 61387, 61436, 61485, 61534, 61583, 61633, 61682, 61731, 61780, 61829, 61878, 61927, 61976, 62025, 62074, 62123, 62172, 62221, 62270, 62319, 62368, 62417, 62466, 62515, 62564, 62614, 62663, 62712, 62761, 62810, 62859, 62908, 62957, 63006, 63055, 63104, 63153, 63202, 63251, 63300, 63349, 63398, 63447, 63496, 63545, 63595, 63644, 63693, 63742, 63791, 63840, 63889, 63938, 63987, 64036, 64085, 64134, 64183, 64232, 64281, 64330, 64379, 64428, 64477, 64526, 64576, 64625, 64674, 64723, 64772, 64821, 64870, 64919, 64968, 65017, 65066, 65115, 65164, 65213, 65262, 65311, 65360, 65409, 65458, 65508, 65508};
+# 104 "newmain.c"
+const unsigned int timer0PreloadValues[100] = {
+    60535, 63035, 63868, 64285, 64535, 64701, 64820, 64910, 64979, 65035,
+    65080, 65118, 65150, 65177, 65201, 65222, 65240, 65257, 65271, 65285,
+    65296, 65307, 65317, 65326, 65335, 65342, 65349, 65356, 65362, 65368,
+    65373, 65378, 65383, 65387, 65392, 65396, 65399, 65403, 65406, 65410,
+    65413, 65415, 65418, 65421, 65423, 65426, 65428, 65430, 65432, 65435,
+    65436, 65438, 65440, 65442, 65444, 65445, 65447, 65448, 65450, 65451,
+    65453, 65454, 65455, 65456, 65458, 65459, 65460, 65461, 65462, 65463,
+    65464, 65465, 65466, 65467, 65468, 65469, 65470, 65470, 65471, 65472,
+    65473, 65474, 65474, 65475, 65476, 65476, 65477, 65478, 65478, 65479,
+    65480, 65480, 65481, 65481, 65482, 65482, 65483, 65483, 65484, 65485
+};
+
+const char digits[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 volatile unsigned int adcPercent = 0;
 volatile unsigned int prevAdcPercent = 101;
@@ -5197,25 +5455,35 @@ volatile unsigned long dutyCycle = 0;
 volatile unsigned char sinusIndex1 = 0;
 volatile unsigned char sinusIndex2 = 85;
 volatile unsigned char sinusIndex3 = 170;
+volatile char d1 = 1;
 
 
 
-unsigned int timer0ReloadMin = 60652;
-unsigned int timer0ReloadMax = 65508;
-volatile unsigned int timer0ReloadValue = 60652;
-volatile unsigned char PrevADRESH = 0;
+
+unsigned int timer5ReloadValue = 3035;
+volatile char timer5OverflowCount = 0;
+volatile unsigned int timer0ReloadValue = 60535;
+volatile unsigned int prevTimer0ReloadValue = 60535;
+volatile unsigned char PrevADRESH = 65;
+volatile char refreshTime = 0;
+volatile char currentPreloadIndex = 0;
+
+void handleDisplay(void);
+void handlePWMDutyCycle(void);
+void handleTimer0Preload(void);
+void display(void);
 
 void configurePWM() {
     LATB = 0;
     TRISB = 0;
     PORTB = 0;
-# 116 "newmain.c"
+# 157 "newmain.c"
     PTCON0bits.PTMOD0 = 0;
     PTCON0bits.PTMOD1 = 0;
-# 130 "newmain.c"
+# 171 "newmain.c"
     PTCON1bits.PTEN = 0;
     PTCON1bits.PTDIR = 0;
-# 158 "newmain.c"
+# 199 "newmain.c"
     PWMCON0bits.PWMEN2 = 1;
     PWMCON0bits.PWMEN1 = 0;
     PWMCON0bits.PWMEN0 = 0;
@@ -5246,9 +5514,9 @@ void configurePWM() {
     PDC0H = 0x00;
     PDC0L = 0x13;
     PIE3bits.PTIE = 1;
-# 196 "newmain.c"
+# 237 "newmain.c"
     OVDCOND = 0xff;
-# 206 "newmain.c"
+# 247 "newmain.c"
     OVDCONS = 0;
 }
 
@@ -5265,7 +5533,7 @@ void stopPWM() {
 
 
 void configureInterrupts() {
-# 241 "newmain.c"
+# 282 "newmain.c"
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
 
@@ -5324,19 +5592,55 @@ void configureTimer0() {
     T0CONbits.T0PS1 = 1;
     T0CONbits.T0PS2 = 0;
     TMR0 = timer0ReloadValue;
-    TRISDbits.RD1 = 0;
+
+}
+
+void configureTimer1() {
+
+    T1CONbits.T1CKPS1 = 1;
+    T1CONbits.T1CKPS0 = 1;
+
+    T1CONbits.TMR1CS = 0;
+    T1CONbits.TMR1ON = 1;
+    PIE1bits.TMR1IE = 1;
+    TMR1 = 0;
+}
+
+void configureTimer5() {
+    T5CONbits.T5PS1 = 1;
+    T5CONbits.T5PS0 = 1;
+    T5CONbits.T5MOD = 0;
+    T5CONbits.TMR5ON = 1;
+    PIE3bits.TMR5IE = 1;
+    TMR5 = timer5ReloadValue;
 }
 
 void main(void) {
-
+    LCD_Initialize();
     configureInterrupts();
     configurePWM();
     configureADC();
     configureTimer0();
+    configureTimer1();
+    configureTimer5();
     startPWM();
 
 
+
+
+
+
+    TRISAbits.TRISA2 = 0;
+    TRISAbits.RA2 = 0;
+    ANSEL0bits.ANS2 = 0;
+    PORTAbits.RA2 = 1;
+
+
+
+    LCDPutChar('a');
     while (1) {
+
+
 
     }
 
@@ -5344,9 +5648,9 @@ void main(void) {
 }
 
 void __attribute__((picinterrupt(("low_priority")))) tcInt(void) {
-    if (PIR3bits.PTIF) {
-        PIR3bits.PTIF = 0;
-    }
+
+
+
     if (PIR1bits.ADIF) {
         PIR1bits.ADIF = 0;
 
@@ -5354,11 +5658,9 @@ void __attribute__((picinterrupt(("low_priority")))) tcInt(void) {
 
 
         if (PrevADRESH != ADRESH) {
-            adcPercent = (255 - ADRESH) * 100 / maxADCVal;
-            timer0ReloadValue = timer0PreloadValues[adcPercent];
+            adcPercent = (255 - ADRESH) * 99 / maxADCVal;
 
-
-         }
+        }
         PrevADRESH = ADRESH;
 
 
@@ -5367,6 +5669,7 @@ void __attribute__((picinterrupt(("low_priority")))) tcInt(void) {
 
         __nop();
     }
+
     if (INTCONbits.T0IF) {
         INTCONbits.T0IF = 0;
         if (sinusIndex1 == 255) {
@@ -5402,4 +5705,75 @@ void __attribute__((picinterrupt(("low_priority")))) tcInt(void) {
         sinusIndex2++;
         sinusIndex3++;
     }
+
+    if (PIR1bits.TMR1IF) {
+        PIR1bits.TMR1IF = 0;
+        TMR1 = 0;
+        refreshTime++;
+        if (refreshTime == 5) {
+            refreshTime = 0;
+            if (prevAdcPercent != adcPercent || prevTimer0ReloadValue != timer0ReloadValue) {
+
+                char str1[16];
+                char str2[16];
+
+                LCDPutCmd(0x01);
+                sprintf(str1, "%d", adcPercent);
+                LCDPutStr(str1);
+                LCDPutChar(' ');
+
+                unsigned int timer0ReloadValueCopy = timer0ReloadValue;
+                char noDigits = 0;
+                while (timer0ReloadValueCopy > 0) {
+                    str2[noDigits] = timer0ReloadValueCopy % 10;
+                    timer0ReloadValueCopy /= 10;
+                    noDigits++;
+                }
+                for (int i = noDigits - 1; i >= 0; i--) {
+                    LCDPutChar(digits[str2[i]]);
+                }
+
+            }
+
+            prevAdcPercent = adcPercent;
+            prevTimer0ReloadValue = timer0ReloadValue;
+        }
+    }
+
+    if (PIR3bits.TMR5IF) {
+        PIR3bits.TMR5IF = 0;
+        TMR5 = timer5ReloadValue;
+
+        if (timer5OverflowCount == 2) {
+            timer5OverflowCount = 0;
+
+
+
+
+            if (currentPreloadIndex < adcPercent) {
+                currentPreloadIndex++;
+            } else if (currentPreloadIndex > adcPercent) {
+                currentPreloadIndex--;
+            }
+            timer0ReloadValue = timer0PreloadValues[currentPreloadIndex];
+        }
+        timer5OverflowCount++;
+    }
+
+}
+
+void handleDisplay() {
+
+}
+
+void display() {
+
+}
+
+void handlePWMDutyCycle() {
+
+}
+
+void handleTimer0Preload() {
+
 }

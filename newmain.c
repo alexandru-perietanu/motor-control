@@ -40,7 +40,7 @@
 #pragma config SSPMX = RC7      // SSP I/O MUX bit (SCK/SCL clocks and SDA/SDI data are multiplexed with RC5 and RC4, respectively. SDO output is multiplexed with RC7.)
 #pragma config PWM4MX = RB5     // PWM4 MUX bit (PWM4 output is multiplexed with RB5)
 #pragma config EXCLKMX = RC3    // TMR0/T5CKI External clock MUX bit (TMR0/T5CKI external clock input is multiplexed with RC3)
-#pragma config MCLRE = OFF       // MCLR Pin Enable bit (Enabled)
+#pragma config MCLRE = ON       // MCLR Pin Enable bit (Enabled)
 
 // CONFIG4L
 #pragma config STVREN = ON      // Stack Full/Underflow Reset Enable bit (Stack full/underflow will cause Reset)
@@ -81,9 +81,40 @@
 
 #include <xc.h>
 #include "pic18f4431.h"
+#include "lcd.h"
+#include "stdint.h"
+#include "stdio.h"
+
+#define _XTAL_FREQ 40000000
+
 
 const int sinusValues[256] = {960, 982, 1004, 1026, 1049, 1071, 1093, 1115, 1137, 1160, 1182, 1211, 1234, 1248, 1271, 1293, 1315, 1337, 1359, 1382, 1404, 1419, 1441, 1463, 1478, 1500, 1515, 1537, 1552, 1574, 1589, 1604, 1626, 1641, 1655, 1670, 1685, 1700, 1715, 1729, 1737, 1752, 1766, 1774, 1789, 1796, 1811, 1818, 1826, 1833, 1840, 1848, 1855, 1863, 1870, 1877, 1877, 1885, 1885, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1885, 1885, 1877, 1877, 1870, 1863, 1863, 1855, 1848, 1840, 1833, 1818, 1811, 1803, 1789, 1781, 1766, 1759, 1744, 1729, 1722, 1707, 1692, 1678, 1663, 1648, 1633, 1611, 1596, 1581, 1567, 1544, 1530, 1507, 1493, 1470, 1448, 1433, 1411, 1389, 1367, 1352, 1330, 1308, 1285, 1263, 1241, 1219, 1197, 1174, 1152, 1130, 1108, 1086, 1063, 1034, 1012, 989, 967, 945, 923, 901, 878, 849, 827, 804, 782, 760, 738, 716, 693, 671, 649, 627, 605, 582, 560, 545, 523, 501, 479, 464, 442, 420, 405, 383, 368, 346, 331, 316, 301, 279, 264, 249, 235, 220, 205, 190, 183, 168, 153, 146, 131, 124, 109, 101, 94, 79, 72, 64, 57, 50, 50, 42, 35, 35, 27, 27, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 27, 27, 35, 35, 42, 50, 57, 64, 72, 79, 87, 94, 101, 116, 124, 138, 146, 161, 175, 183, 198, 212, 227, 242, 257, 272, 286, 309, 323, 338, 360, 375, 397, 412, 434, 449, 471, 494, 508, 531, 553, 575, 597, 619, 642, 664, 679, 701, 730, 753, 775, 797, 819, 841, 864, 886, 908, 930, 952};
-const unsigned int timer0PreloadValues[101] = {60652, 60701, 60750, 60799, 60848, 60897, 60946, 60995, 61044, 61093, 61142, 61191, 61240, 61289, 61338, 61387, 61436, 61485, 61534, 61583, 61633, 61682, 61731, 61780, 61829, 61878, 61927, 61976, 62025, 62074, 62123, 62172, 62221, 62270, 62319, 62368, 62417, 62466, 62515, 62564, 62614, 62663, 62712, 62761, 62810, 62859, 62908, 62957, 63006, 63055, 63104, 63153, 63202, 63251, 63300, 63349, 63398, 63447, 63496, 63545, 63595, 63644, 63693, 63742, 63791, 63840, 63889, 63938, 63987, 64036, 64085, 64134, 64183, 64232, 64281, 64330, 64379, 64428, 64477, 64526, 64576, 64625, 64674, 64723, 64772, 64821, 64870, 64919, 64968, 65017, 65066, 65115, 65164, 65213, 65262, 65311, 65360, 65409, 65458, 65508, 65508};
+/*const unsigned int timer0PreloadValues[101] = 
+{60652, 60701, 60750, 60799, 60848, 60897, 60946, 60995, 61044, 61093,
+61142, 61191, 61240, 61289, 61338, 61387, 61436, 61485, 61534, 61583,
+61633, 61682, 61731, 61780, 61829, 61878, 61927, 61976, 62025, 62074,
+62123, 62172, 62221, 62270, 62319, 62368, 62417, 62466, 62515, 62564, 
+62614, 62663, 62712, 62761, 62810, 62859, 62908, 62957, 63006, 63055,
+63104, 63153, 63202, 63251, 63300, 63349, 63398, 63447, 63496, 63545,
+63595, 63644, 63693, 63742, 63791, 63840, 63889, 63938, 63987, 64036,
+64085, 64134, 64183, 64232, 64281, 64330, 64379, 64428, 64477, 64526, 
+64576, 64625, 64674, 64723, 64772, 64821, 64870, 64919, 64968, 65017,
+65066, 65115, 65164, 65213, 65262, 65311, 65360, 65409, 65458, 65508, 65508};
+ */
+const unsigned int timer0PreloadValues[100] = {
+    60535, 63035, 63868, 64285, 64535, 64701, 64820, 64910, 64979, 65035,
+    65080, 65118, 65150, 65177, 65201, 65222, 65240, 65257, 65271, 65285,
+    65296, 65307, 65317, 65326, 65335, 65342, 65349, 65356, 65362, 65368,
+    65373, 65378, 65383, 65387, 65392, 65396, 65399, 65403, 65406, 65410,
+    65413, 65415, 65418, 65421, 65423, 65426, 65428, 65430, 65432, 65435,
+    65436, 65438, 65440, 65442, 65444, 65445, 65447, 65448, 65450, 65451,
+    65453, 65454, 65455, 65456, 65458, 65459, 65460, 65461, 65462, 65463,
+    65464, 65465, 65466, 65467, 65468, 65469, 65470, 65470, 65471, 65472,
+    65473, 65474, 65474, 65475, 65476, 65476, 65477, 65478, 65478, 65479,
+    65480, 65480, 65481, 65481, 65482, 65482, 65483, 65483, 65484, 65485
+};
+
+const char digits[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 volatile unsigned int adcPercent = 0;
 volatile unsigned int prevAdcPercent = 101;
@@ -92,13 +123,23 @@ volatile unsigned long dutyCycle = 0;
 volatile unsigned char sinusIndex1 = 0;
 volatile unsigned char sinusIndex2 = 85;
 volatile unsigned char sinusIndex3 = 170;
-//volatile char d1 = 1;
+volatile char d1 = 1;
 //char sinusVales[256] = {128, 131, 134, 137, 140, 143, 146, 149, 152, 155, 158, 162, 165, 167, 170, 173, 176, 179, 182, 185, 188, 190, 193, 196, 198, 201, 203, 206, 208, 211, 213, 215, 218, 220, 222, 224, 226, 228, 230, 232, 233, 235, 237, 238, 240, 241, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 252, 253, 253, 254, 254, 254, 254, 254, 254, 254, 254, 254, 254, 253, 253, 252, 252, 251, 250, 250, 249, 248, 247, 246, 244, 243, 242, 240, 239, 237, 236, 234, 232, 231, 229, 227, 225, 223, 221, 219, 216, 214, 212, 210, 207, 205, 202, 200, 197, 194, 192, 189, 186, 183, 181, 178, 175, 172, 169, 166, 163, 160, 157, 154, 151, 148, 145, 142, 138, 135, 132, 129, 126, 123, 120, 117, 113, 110, 107, 104, 101, 98, 95, 92, 89, 86, 83, 80, 77, 74, 72, 69, 66, 63, 61, 58, 55, 53, 50, 48, 45, 43, 41, 39, 36, 34, 32, 30, 28, 26, 24, 23, 21, 19, 18, 16, 15, 13, 12, 11, 9, 8, 7, 6, 5, 5, 4, 3, 3, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 17, 18, 20, 22, 23, 25, 27, 29, 31, 33, 35, 37, 40, 42, 44, 47, 49, 52, 54, 57, 59, 62, 65, 67, 70, 73, 76, 79, 82, 85, 88, 90, 93, 97, 100, 103, 106, 109, 112, 115, 118, 121, 124, 127};
 
-unsigned int timer0ReloadMin = 60652; // pt 1Hz
-unsigned int timer0ReloadMax = 65508; // pt 100Hz
-volatile unsigned int timer0ReloadValue = 60652;
-volatile unsigned char PrevADRESH = 0;
+//unsigned int timer0ReloadMin = 60652; // pt 1Hz
+//unsigned int timer0ReloadMax = 65508; // pt 100Hz
+unsigned int timer5ReloadValue = 3035;
+volatile char timer5OverflowCount = 0;
+volatile unsigned int timer0ReloadValue = 60535;
+volatile unsigned int prevTimer0ReloadValue = 60535;
+volatile unsigned char PrevADRESH = 65;
+volatile char refreshTime = 0;
+volatile char currentPreloadIndex = 0;
+
+void handleDisplay(void);
+void handlePWMDutyCycle(void);
+void handleTimer0Preload(void);
+void display(void);
 
 void configurePWM() {
     LATB = 0;
@@ -296,29 +337,65 @@ void configureTimer0() {
     T0CONbits.T0PS1 = 1;
     T0CONbits.T0PS2 = 0;
     TMR0 = timer0ReloadValue;
-    TRISDbits.RD1 = 0;
+    //TRISDbits.RD1 = 0;
+}
+
+void configureTimer1() {
+    //prescale = 8
+    T1CONbits.T1CKPS1 = 1;
+    T1CONbits.T1CKPS0 = 1;
+
+    T1CONbits.TMR1CS = 0;
+    T1CONbits.TMR1ON = 1;
+    PIE1bits.TMR1IE = 1;
+    TMR1 = 0;
+}
+
+void configureTimer5() {
+    T5CONbits.T5PS1 = 1;
+    T5CONbits.T5PS0 = 1;
+    T5CONbits.T5MOD = 0;
+    T5CONbits.TMR5ON = 1;
+    PIE3bits.TMR5IE = 1;
+    TMR5 = timer5ReloadValue;
 }
 
 void main(void) {
-
+    LCD_Initialize();
     configureInterrupts();
     configurePWM();
     configureADC();
     configureTimer0();
+    configureTimer1();
+    configureTimer5();
     startPWM();
+
+    //DisplayClr();
+    ///LCDPutStr("aaaa");
+
+
+
+    TRISAbits.TRISA2 = 0;
+    TRISAbits.RA2 = 0;
+    ANSEL0bits.ANS2 = 0;
+    PORTAbits.RA2 = 1;
+    //timer0ReloadValue = timer0PreloadValues[50];
+
     //stopPWM();
-
+    LCDPutChar('a');
     while (1) {
-
+        //        if (shouldDisplay) {
+        //            display();
+        //        }
     }
 
     return;
 }
 
 void __interrupt(low_priority) tcInt(void) {
-    if (PIR3bits.PTIF) {
-        PIR3bits.PTIF = 0;
-    }
+    //    if (PIR3bits.PTIF) {
+    //        PIR3bits.PTIF = 0;
+    //    }
     if (PIR1bits.ADIF) {
         PIR1bits.ADIF = 0;
         //unsigned int adcVal = (ADRESH << 8) | ADRES;
@@ -326,11 +403,9 @@ void __interrupt(low_priority) tcInt(void) {
         //prevAdcPercent = adcPercent;
 
         if (PrevADRESH != ADRESH) {
-            adcPercent = (255 - ADRESH) * 100 / maxADCVal;
-            timer0ReloadValue = timer0PreloadValues[adcPercent];
-        //timer0ReloadValue = map(adcPercent, 0, 100, timer0ReloadMin, timer0ReloadMax);
-        //timer0ReloadValue = (unsigned long)(adcPercent * 4850) / 100 + 60652;
-         }
+            adcPercent = (255 - ADRESH) * 99 / maxADCVal;
+            //timer0ReloadValue = timer0PreloadValues[adcPercent];
+        }
         PrevADRESH = ADRESH;
         //dutyCycle = 13 + 1900 - (19 * adcPercent);
         //unsigned char duty = (dutyCycle >> 8);
@@ -339,6 +414,7 @@ void __interrupt(low_priority) tcInt(void) {
 
         NOP();
     }
+
     if (INTCONbits.T0IF) {
         INTCONbits.T0IF = 0;
         if (sinusIndex1 == 255) {
@@ -374,4 +450,75 @@ void __interrupt(low_priority) tcInt(void) {
         sinusIndex2++;
         sinusIndex3++;
     }
+
+    if (PIR1bits.TMR1IF) {
+        PIR1bits.TMR1IF = 0;
+        TMR1 = 0;
+        refreshTime++;
+        if (refreshTime == 5) {
+            refreshTime = 0;
+            if (prevAdcPercent != adcPercent || prevTimer0ReloadValue != timer0ReloadValue) {
+
+                char str1[16];
+                char str2[16];
+
+                DisplayClr();
+                sprintf(str1, "%d", adcPercent);
+                LCDPutStr(str1);
+                LCDPutChar(' ');
+
+                unsigned int timer0ReloadValueCopy = timer0ReloadValue;
+                char noDigits = 0;
+                while (timer0ReloadValueCopy > 0) {
+                    str2[noDigits] = timer0ReloadValueCopy % 10;
+                    timer0ReloadValueCopy /= 10;
+                    noDigits++;
+                }
+                for (int i = noDigits - 1; i >= 0; i--) {
+                    LCDPutChar(digits[str2[i]]);
+                }
+                //shouldDisplay = 0;
+            }
+
+            prevAdcPercent = adcPercent;
+            prevTimer0ReloadValue = timer0ReloadValue;
+        }
+    }
+
+    if (PIR3bits.TMR5IF) {
+        PIR3bits.TMR5IF = 0;
+        TMR5 = timer5ReloadValue;
+
+        if (timer5OverflowCount == 2) {
+            timer5OverflowCount = 0;
+            //PORTAbits.RA4 = 1;
+            //PORTAbits.RA2 = d1;
+            //d1 = !d1;
+            
+            if (currentPreloadIndex < adcPercent) {
+                currentPreloadIndex++;
+            } else if (currentPreloadIndex > adcPercent) {
+                currentPreloadIndex--;
+            }
+            timer0ReloadValue = timer0PreloadValues[currentPreloadIndex];
+        }
+        timer5OverflowCount++;
+    }
+
+}
+
+void handleDisplay() {
+
+}
+
+void display() {
+
+}
+
+void handlePWMDutyCycle() {
+
+}
+
+void handleTimer0Preload() {
+
 }

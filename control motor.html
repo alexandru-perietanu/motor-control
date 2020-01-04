@@ -10,6 +10,8 @@
         var pointsArray = [];
         var count = 0;
         var s2;
+        var frequenciesForPreload = {};
+        var preloadHash = {};
 
         function start() {
             var canvas = document.getElementsByTagName("canvas")[0];
@@ -32,15 +34,24 @@
             var minVal = 60652;
             var maxVal = 65508;
             s2 = "";
-            for (var i = 0; i < 100; i++) {
+            
+            for (var i = 1; i <= 100; i++) {
+
+                preloadHash[i] = Math.floor(65535 - (1 / (i * 0.0002)));
+
+                let val =  Math.floor(map(i, 0, 99, minVal, maxVal));
+                frequenciesForPreload[val] = 1 / ((65535 - val) * 0.0002048);
                 if (i < 99) {
-                    s2 += Math.floor(map(i, 0, 99, minVal, maxVal)) + ", ";
+                    s2 += val + ", ";
                 } else {
-                    s2 += Math.floor(map(i, 0, 99, minVal, maxVal));
+                    s2 += val;
                 }
                     
             }
             console.log(s2);
+            console.table(frequenciesForPreload);
+            console.table(preloadHash);
+            
 
             function map(x, in_min, in_max, out_min, out_max) {
                 return (x - in_min) * ((out_max - out_min) / (in_max - in_min)) + out_min;

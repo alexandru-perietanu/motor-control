@@ -3,6 +3,20 @@
 [d edition pro ]
 [d chip 18F4431 ]
 [d frameptr 4065 ]
+"1 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\abs.c
+[v _abs abs `(i  1 e 2 0 ]
+"9 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\aodiv.c
+[v ___aodiv __aodiv `(o  1 e 8 0 ]
+"9 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\aomod.c
+[v ___aomod __aomod `(o  1 e 8 0 ]
+"72 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\doprnt.c
+[v _pad pad `(i  1 s 2 pad ]
+"274
+[v _dtoa dtoa `(i  1 s 2 dtoa ]
+"670
+[v _vfpfcnvrt vfpfcnvrt `(i  1 s 2 vfpfcnvrt ]
+"1368
+[v _vfprintf vfprintf `(i  1 e 2 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\fleq.c
 [v ___fleq __fleq `(b  1 e 0 0 ]
 "62 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\float.c
@@ -17,6 +31,16 @@
 [v ___ftsub __ftsub `(f  1 e 4 0 ]
 "7 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"7 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_fputc.c
+[v _fputc fputc `(i  1 e 2 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_fputs.c
+[v _fputs fputs `(i  1 e 2 0 ]
+"9 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_sprintf.c
+[v _sprintf sprintf `(i  1 e 2 0 ]
+"7 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\putch.c
+[v _putch putch `(v  1 e 1 0 ]
 "10 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 4 0 ]
 "245
@@ -25,23 +49,42 @@
 [v ___fldiv __fldiv `(d  1 e 4 0 ]
 "8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\strlen.c
+[v _strlen strlen `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-"103 D:\scoala\electronica\induction motor control\control motor\newmain.c
+"48 D:\scoala\electronica\induction motor control\control motor\lcd.c
+[v _LCD_Initialize LCD_Initialize `(v  1 e 1 0 ]
+"89
+[v _LCDWriteNibble LCDWriteNibble `(v  1 e 1 0 ]
+[v i1_LCDWriteNibble LCDWriteNibble `(v  1 e 1 0 ]
+"119
+[v _LCDPutChar LCDPutChar `(v  1 e 1 0 ]
+[v i1_LCDPutChar LCDPutChar `(v  1 e 1 0 ]
+"132
+[v _LCDPutCmd LCDPutCmd `(v  1 e 1 0 ]
+[v i1_LCDPutCmd LCDPutCmd `(v  1 e 1 0 ]
+"147
+[v _LCDPutStr LCDPutStr `(v  1 e 1 0 ]
+"144 D:\scoala\electronica\induction motor control\control motor\newmain.c
 [v _configurePWM configurePWM `(v  1 e 1 0 ]
-"209
+"250
 [v _startPWM startPWM `(v  1 e 1 0 ]
-"221
+"262
 [v _configureInterrupts configureInterrupts `(v  1 e 1 0 ]
-"252
+"293
 [v _configureADC configureADC `(v  1 e 1 0 ]
-"285
+"326
 [v _configureTimer0 configureTimer0 `(v  1 e 1 0 ]
-"302
+"343
+[v _configureTimer1 configureTimer1 `(v  1 e 1 0 ]
+"354
+[v _configureTimer5 configureTimer5 `(v  1 e 1 0 ]
+"363
 [v _main main `(v  1 e 1 0 ]
-"318
+"395
 [v _tcInt tcInt `IIL(v  1 e 1 0 ]
 "365 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\include\pic18f4431.h
 [v _OVDCONS OVDCONS `VEuc  1 e 1 @3946 ]
@@ -115,8 +158,116 @@
 ]
 [u S40 . 1 `S27 1 . 1 0 `S31 1 . 1 0 ]
 [v _PTCON0bits PTCON0bits `VES40  1 e 1 @3967 ]
+[s S424 . 1 `uc 1 RA0 1 0 :1:0 
+`uc 1 RA1 1 0 :1:1 
+`uc 1 RA2 1 0 :1:2 
+`uc 1 RA3 1 0 :1:3 
+`uc 1 RA4 1 0 :1:4 
+`uc 1 RA5 1 0 :1:5 
+`uc 1 RA6 1 0 :1:6 
+`uc 1 RA7 1 0 :1:7 
+]
+"1077
+[s S685 . 1 `uc 1 AN0 1 0 :1:0 
+`uc 1 AN1 1 0 :1:1 
+`uc 1 AN2 1 0 :1:2 
+`uc 1 AN3 1 0 :1:3 
+`uc 1 AN4 1 0 :1:4 
+`uc 1 AN5 1 0 :1:5 
+`uc 1 OSC2 1 0 :1:6 
+`uc 1 OSC1 1 0 :1:7 
+]
+[s S694 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 VREFM 1 0 :1:2 
+`uc 1 VREFP 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 LVDIN 1 0 :1:5 
+`uc 1 CLKO 1 0 :1:6 
+`uc 1 CLKI 1 0 :1:7 
+]
+[s S702 . 1 `uc 1 ULPWUIN 1 0 :1:0 
+`uc 1 . 1 0 :6:1 
+`uc 1 RJPU 1 0 :1:7 
+]
+[u S706 . 1 `S424 1 . 1 0 `S685 1 . 1 0 `S694 1 . 1 0 `S702 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES706  1 e 1 @3968 ]
 "1197
 [v _PORTB PORTB `VEuc  1 e 1 @3969 ]
+[s S1025 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 RC3 1 0 :1:3 
+`uc 1 RC4 1 0 :1:4 
+`uc 1 RC5 1 0 :1:5 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+"1339
+[s S1105 . 1 `uc 1 T1OSO 1 0 :1:0 
+`uc 1 T1OSI 1 0 :1:1 
+`uc 1 CCP1 1 0 :1:2 
+`uc 1 INT0 1 0 :1:3 
+`uc 1 INT1 1 0 :1:4 
+`uc 1 INT2 1 0 :1:5 
+`uc 1 TX 1 0 :1:6 
+`uc 1 RX 1 0 :1:7 
+]
+[s S1114 . 1 `uc 1 T13CKI 1 0 :1:0 
+`uc 1 CCP2 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 T0CKI 1 0 :1:3 
+`uc 1 SDA 1 0 :1:4 
+`uc 1 SCK 1 0 :1:5 
+`uc 1 CK 1 0 :1:6 
+`uc 1 DT 1 0 :1:7 
+]
+[s S1123 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_FLTA 1 0 :1:1 
+]
+[s S1126 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_FLTB 1 0 :1:2 
+]
+[s S1129 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 NOT_SS 1 0 :1:6 
+]
+[s S1132 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nFLTA 1 0 :1:1 
+`uc 1 nFLTB 1 0 :1:2 
+`uc 1 T5CKI 1 0 :1:3 
+`uc 1 SDI 1 0 :1:4 
+`uc 1 SCL 1 0 :1:5 
+`uc 1 nSS 1 0 :1:6 
+`uc 1 SDO 1 0 :1:7 
+]
+[s S1141 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 FLTA 1 0 :1:1 
+`uc 1 FLTB 1 0 :1:2 
+`uc 1 . 1 0 :3:3 
+`uc 1 SS 1 0 :1:6 
+]
+[s S1147 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 PA2 1 0 :1:1 
+`uc 1 PA1 1 0 :1:2 
+]
+[u S1151 . 1 `S1025 1 . 1 0 `S1105 1 . 1 0 `S1114 1 . 1 0 `S1123 1 . 1 0 `S1126 1 . 1 0 `S1129 1 . 1 0 `S1132 1 . 1 0 `S1141 1 . 1 0 `S1147 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES1151  1 e 1 @3970 ]
+[s S1065 . 1 `uc 1 RD0 1 0 :1:0 
+`uc 1 RD1 1 0 :1:1 
+`uc 1 RD2 1 0 :1:2 
+`uc 1 RD3 1 0 :1:3 
+`uc 1 RD4 1 0 :1:4 
+`uc 1 RD5 1 0 :1:5 
+`uc 1 RD6 1 0 :1:6 
+`uc 1 RD7 1 0 :1:7 
+]
+"1555
+[s S1226 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 SS2 1 0 :1:7 
+]
+[u S1229 . 1 `S1065 1 . 1 0 `S1226 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES1229  1 e 1 @3971 ]
+"1731
+[v _TMR5 TMR5 `VEus  1 e 2 @3975 ]
 "1864
 [v _LATB LATB `VEuc  1 e 1 @3978 ]
 [s S415 . 1 `uc 1 TRISA0 1 0 :1:0 
@@ -129,20 +280,23 @@
 `uc 1 TRISA7 1 0 :1:7 
 ]
 "2305
-[s S424 . 1 `uc 1 RA0 1 0 :1:0 
-`uc 1 RA1 1 0 :1:1 
-`uc 1 RA2 1 0 :1:2 
-`uc 1 RA3 1 0 :1:3 
-`uc 1 RA4 1 0 :1:4 
-`uc 1 RA5 1 0 :1:5 
-`uc 1 RA6 1 0 :1:6 
-`uc 1 RA7 1 0 :1:7 
-]
 [u S433 . 1 `S415 1 . 1 0 `S424 1 . 1 0 ]
 [v _TRISAbits TRISAbits `VES433  1 e 1 @3986 ]
 "2495
 [v _TRISB TRISB `VEuc  1 e 1 @3987 ]
-[s S554 . 1 `uc 1 TRISD0 1 0 :1:0 
+[s S1016 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"2749
+[u S1034 . 1 `S1016 1 . 1 0 `S1025 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES1034  1 e 1 @3988 ]
+[s S1056 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -152,17 +306,8 @@
 `uc 1 TRISD7 1 0 :1:7 
 ]
 "2971
-[s S563 . 1 `uc 1 RD0 1 0 :1:0 
-`uc 1 RD1 1 0 :1:1 
-`uc 1 RD2 1 0 :1:2 
-`uc 1 RD3 1 0 :1:3 
-`uc 1 RD4 1 0 :1:4 
-`uc 1 RD5 1 0 :1:5 
-`uc 1 RD6 1 0 :1:6 
-`uc 1 RD7 1 0 :1:7 
-]
-[u S572 . 1 `S554 1 . 1 0 `S563 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES572  1 e 1 @3989 ]
+[u S1074 . 1 `S1056 1 . 1 0 `S1065 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES1074  1 e 1 @3989 ]
 [s S343 . 1 `uc 1 SASEL 1 0 :2:0 
 `uc 1 SCSEL 1 0 :2:2 
 `uc 1 SBSEL 1 0 :2:4 
@@ -261,20 +406,49 @@
 ]
 [u S143 . 1 `S126 1 . 1 0 `S132 1 . 1 0 `S138 1 . 1 0 ]
 [v _PIE3bits PIE3bits `VES143  1 e 1 @4003 ]
-[s S594 . 1 `uc 1 TMR5IF 1 0 :1:0 
+[s S772 . 1 `uc 1 TMR5IF 1 0 :1:0 
 `uc 1 IC1IF 1 0 :1:1 
 `uc 1 IC2QEIF 1 0 :1:2 
 `uc 1 IC3DRIF 1 0 :1:3 
 `uc 1 PTIF 1 0 :1:4 
 ]
 "4006
-[s S600 . 1 `uc 1 . 1 0 :1:0 
+[s S778 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 RXBNIF 1 0 :1:1 
 `uc 1 . 1 0 :2:2 
 `uc 1 TXBNIF 1 0 :1:4 
 ]
-[u S605 . 1 `S594 1 . 1 0 `S600 1 . 1 0 ]
-[v _PIR3bits PIR3bits `VES605  1 e 1 @4004 ]
+[u S783 . 1 `S772 1 . 1 0 `S778 1 . 1 0 ]
+[v _PIR3bits PIR3bits `VES783  1 e 1 @4004 ]
+[s S612 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_T5SYNC 1 0 :1:2 
+]
+"5072
+[s S615 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 NOT_RESEN 1 0 :1:6 
+]
+[s S618 . 1 `uc 1 TMR5ON 1 0 :1:0 
+`uc 1 TMR5CS 1 0 :1:1 
+`uc 1 nT5SYNC 1 0 :1:2 
+`uc 1 T5PS 1 0 :2:3 
+`uc 1 T5MOD 1 0 :1:5 
+`uc 1 nRESEN 1 0 :1:6 
+`uc 1 T5SEN 1 0 :1:7 
+]
+[s S626 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T5SYNC 1 0 :1:2 
+`uc 1 T5PS0 1 0 :1:3 
+`uc 1 T5PS1 1 0 :1:4 
+`uc 1 . 1 0 :1:5 
+`uc 1 RESEN 1 0 :1:6 
+]
+[s S633 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 RD165 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 SOSCEN5 1 0 :1:3 
+]
+[u S638 . 1 `S612 1 . 1 0 `S615 1 . 1 0 `S618 1 . 1 0 `S626 1 . 1 0 `S633 1 . 1 0 ]
+[v _T5CONbits T5CONbits `VES638  1 e 1 @4023 ]
 [s S394 . 1 `uc 1 ANS0 1 0 :1:0 
 `uc 1 ANS1 1 0 :1:1 
 `uc 1 ANS2 1 0 :1:2 
@@ -338,6 +512,36 @@
 [v _ADCON0bits ADCON0bits `VES245  1 e 1 @4034 ]
 "5739
 [v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
+[s S554 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_T1SYNC 1 0 :1:2 
+]
+"6371
+[s S557 . 1 `uc 1 TMR1ON 1 0 :1:0 
+`uc 1 TMR1CS 1 0 :1:1 
+`uc 1 nT1SYNC 1 0 :1:2 
+`uc 1 T1OSCEN 1 0 :1:3 
+`uc 1 T1CKPS 1 0 :2:4 
+`uc 1 T1RUN 1 0 :1:6 
+`uc 1 RD16 1 0 :1:7 
+]
+[s S565 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T1SYNC 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 T1CKPS0 1 0 :1:4 
+`uc 1 T1CKPS1 1 0 :1:5 
+]
+[s S571 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T1INSYNC 1 0 :1:2 
+]
+[s S574 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SOSCEN 1 0 :1:3 
+`uc 1 . 1 0 :3:4 
+`uc 1 T1RD16 1 0 :1:7 
+]
+[u S579 . 1 `S554 1 . 1 0 `S557 1 . 1 0 `S565 1 . 1 0 `S571 1 . 1 0 `S574 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES579  1 e 1 @4045 ]
+"6446
+[v _TMR1 TMR1 `VEus  1 e 2 @4046 ]
 [s S525 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
@@ -380,64 +584,286 @@
 ]
 [u S189 . 1 `S167 1 . 1 0 `S176 1 . 1 0 `S185 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES189  1 e 1 @4082 ]
-"85 D:\scoala\electronica\induction motor control\control motor\newmain.c
+"55 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\doprnt.c
+[v _flags flags `i  1 s 2 flags ]
+[v _prec prec `i  1 s 2 prec ]
+[v _width width `i  1 s 2 width ]
+"66
+[v _dbuf dbuf `[32]uc  1 s 32 dbuf ]
+"69
+[v _nout nout `i  1 s 2 nout ]
+"91 D:\scoala\electronica\induction motor control\control motor\newmain.c
 [v _sinusValues sinusValues `C[256]i  1 e 512 0 ]
-"86
-[v _timer0PreloadValues timer0PreloadValues `C[101]ui  1 e 202 0 ]
-"88
+"104
+[v _timer0PreloadValues timer0PreloadValues `C[100]ui  1 e 200 0 ]
+"117
+[v _digits digits `C[10]uc  1 e 10 0 ]
+"119
 [v _adcPercent adcPercent `VEui  1 e 2 0 ]
-"89
+"120
 [v _prevAdcPercent prevAdcPercent `VEui  1 e 2 0 ]
-"90
+"121
 [v _maxADCVal maxADCVal `ui  1 e 2 0 ]
-"91
+"122
 [v _dutyCycle dutyCycle `VEul  1 e 4 0 ]
-"92
+"123
 [v _sinusIndex1 sinusIndex1 `VEuc  1 e 1 0 ]
-"93
+"124
 [v _sinusIndex2 sinusIndex2 `VEuc  1 e 1 0 ]
-"94
+"125
 [v _sinusIndex3 sinusIndex3 `VEuc  1 e 1 0 ]
-"100
+"126
+[v _d1 d1 `VEuc  1 e 1 0 ]
+"131
+[v _timer5ReloadValue timer5ReloadValue `ui  1 e 2 0 ]
+"132
+[v _timer5OverflowCount timer5OverflowCount `VEuc  1 e 1 0 ]
+"133
 [v _timer0ReloadValue timer0ReloadValue `VEui  1 e 2 0 ]
-"101
+"134
+[v _prevTimer0ReloadValue prevTimer0ReloadValue `VEui  1 e 2 0 ]
+"135
 [v _PrevADRESH PrevADRESH `VEuc  1 e 1 0 ]
-"302
+"136
+[v _refreshTime refreshTime `VEuc  1 e 1 0 ]
+"137
+[v _currentPreloadIndex currentPreloadIndex `VEuc  1 e 1 0 ]
+"363
 [v _main main `(v  1 e 1 0 ]
 {
-"316
+"393
 } 0
-"209
+"250
 [v _startPWM startPWM `(v  1 e 1 0 ]
 {
-"211
+"252
 } 0
-"285
+"354
+[v _configureTimer5 configureTimer5 `(v  1 e 1 0 ]
+{
+"361
+} 0
+"343
+[v _configureTimer1 configureTimer1 `(v  1 e 1 0 ]
+{
+"352
+} 0
+"326
 [v _configureTimer0 configureTimer0 `(v  1 e 1 0 ]
 {
-"300
+"341
 } 0
-"103
+"144
 [v _configurePWM configurePWM `(v  1 e 1 0 ]
 {
-"207
+"248
 } 0
-"221
+"262
 [v _configureInterrupts configureInterrupts `(v  1 e 1 0 ]
 {
-"250
+"291
 } 0
-"252
+"293
 [v _configureADC configureADC `(v  1 e 1 0 ]
 {
-"283
+"324
 } 0
-"318
+"48 D:\scoala\electronica\induction motor control\control motor\lcd.c
+[v _LCD_Initialize LCD_Initialize `(v  1 e 1 0 ]
+{
+"87
+} 0
+"132
+[v _LCDPutCmd LCDPutCmd `(v  1 e 1 0 ]
+{
+[v LCDPutCmd@ch ch `uc  1 a 1 wreg ]
+[v LCDPutCmd@ch ch `uc  1 a 1 wreg ]
+[v LCDPutCmd@ch ch `uc  1 a 1 4 ]
+"145
+} 0
+"119
+[v _LCDPutChar LCDPutChar `(v  1 e 1 0 ]
+{
+[v LCDPutChar@ch ch `uc  1 a 1 wreg ]
+[v LCDPutChar@ch ch `uc  1 a 1 wreg ]
+[v LCDPutChar@ch ch `uc  1 a 1 4 ]
+"130
+} 0
+"89
+[v _LCDWriteNibble LCDWriteNibble `(v  1 e 1 0 ]
+{
+[v LCDWriteNibble@ch ch `uc  1 a 1 wreg ]
+[v LCDWriteNibble@ch ch `uc  1 a 1 wreg ]
+[v LCDWriteNibble@rs rs `uc  1 p 1 0 ]
+"91
+[v LCDWriteNibble@ch ch `uc  1 a 1 2 ]
+"117
+} 0
+"395 D:\scoala\electronica\induction motor control\control motor\newmain.c
 [v _tcInt tcInt `IIL(v  1 e 1 0 ]
 {
-"355
-[v tcInt@duty duty `uc  1 a 1 18 ]
-"377
+"477
+[v tcInt@i i `i  1 a 2 60 ]
+"462
+[v tcInt@str1 str1 `[16]uc  1 a 16 41 ]
+"463
+[v tcInt@str2 str2 `[16]uc  1 a 16 25 ]
+"470
+[v tcInt@timer0ReloadValueCopy timer0ReloadValueCopy `ui  1 a 2 58 ]
+"471
+[v tcInt@noDigits noDigits `uc  1 a 1 57 ]
+"431
+[v tcInt@duty duty `uc  1 a 1 62 ]
+"508
+} 0
+"132 D:\scoala\electronica\induction motor control\control motor\lcd.c
+[v i1_LCDPutCmd LCDPutCmd `(v  1 e 1 0 ]
+{
+[v i1LCDPutCmd@ch ch `uc  1 a 1 wreg ]
+[v i1LCDPutCmd@ch ch `uc  1 a 1 wreg ]
+[v i1LCDPutCmd@ch ch `uc  1 a 1 4 ]
+"145
+} 0
+"9 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_sprintf.c
+[v _sprintf sprintf `(i  1 e 2 0 ]
+{
+[s S1808 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+"13
+[v sprintf@f f `S1808  1 a 6 4 ]
+"12
+[v sprintf@ap ap `[1]*.39v  1 a 2 2 ]
+"9
+[v sprintf@s s `*.39uc  1 p 2 87 ]
+[v sprintf@fmt fmt `*.25Cuc  1 p 2 89 ]
+"23
+} 0
+"1368 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\doprnt.c
+[v _vfprintf vfprintf `(i  1 e 2 0 ]
+{
+"1371
+[v vfprintf@cfmt cfmt `*.25uc  1 a 2 85 ]
+[s S1300 _IO_FILE 0 ]
+"1368
+[v vfprintf@fp fp `*.39S1300  1 p 2 79 ]
+[v vfprintf@fmt fmt `*.25Cuc  1 p 2 81 ]
+[v vfprintf@ap ap `*.39*.39v  1 p 2 83 ]
+"1382
+} 0
+"670
+[v _vfpfcnvrt vfpfcnvrt `(i  1 s 2 vfpfcnvrt ]
+{
+"674
+[v vfpfcnvrt@ll ll `o  1 a 8 71 ]
+[s S1300 _IO_FILE 0 ]
+"670
+[v vfpfcnvrt@fp fp `*.39S1300  1 p 2 63 ]
+[v vfpfcnvrt@fmt fmt `*.39*.25uc  1 p 2 65 ]
+[v vfpfcnvrt@ap ap `*.39*.39v  1 p 2 67 ]
+"1365
+} 0
+"274
+[v _dtoa dtoa `(i  1 s 2 dtoa ]
+{
+"277
+[v dtoa@n n `o  1 a 8 53 ]
+"276
+[v dtoa@i i `i  1 a 2 61 ]
+[v dtoa@s s `i  1 a 2 51 ]
+[v dtoa@w w `i  1 a 2 49 ]
+[v dtoa@p p `i  1 a 2 47 ]
+[s S1300 _IO_FILE 0 ]
+"274
+[v dtoa@fp fp `*.39S1300  1 p 2 27 ]
+[v dtoa@d d `o  1 p 8 29 ]
+"315
+} 0
+"72
+[v _pad pad `(i  1 s 2 pad ]
+{
+"74
+[v pad@w w `i  1 a 2 25 ]
+[v pad@i i `i  1 a 2 23 ]
+[s S1300 _IO_FILE 0 ]
+"72
+[v pad@fp fp `*.39S1300  1 p 2 16 ]
+[v pad@buf buf `*.39uc  1 p 2 18 ]
+[v pad@p p `i  1 p 2 20 ]
+"95
+} 0
+"5 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\strlen.c
+[v _strlen strlen `(ui  1 e 2 0 ]
+{
+"7
+[v strlen@a a `*.39Cuc  1 a 2 2 ]
+"5
+[v strlen@s s `*.39Cuc  1 p 2 0 ]
+"12
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_fputs.c
+[v _fputs fputs `(i  1 e 2 0 ]
+{
+"11
+[v fputs@i i `i  1 a 2 14 ]
+"10
+[v fputs@c c `uc  1 a 1 13 ]
+"8
+[v fputs@s s `*.39Cuc  1 p 2 9 ]
+[s S1808 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[v fputs@fp fp `*.39S1808  1 p 2 11 ]
+"19
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\nf_fputc.c
+[v _fputc fputc `(i  1 e 2 0 ]
+{
+[v fputc@c c `i  1 p 2 0 ]
+[s S1808 _IO_FILE 6 `*.39uc 1 buffer 2 0 `i 1 count 2 2 `i 1 limit 2 4 ]
+[v fputc@fp fp `*.39S1808  1 p 2 2 ]
+"21
+} 0
+"7 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\putch.c
+[v _putch putch `(v  1 e 1 0 ]
+{
+"9
+} 0
+"1 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\abs.c
+[v _abs abs `(i  1 e 2 0 ]
+{
+[v abs@a a `i  1 p 2 18 ]
+"4
+} 0
+"9 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\aomod.c
+[v ___aomod __aomod `(o  1 e 8 0 ]
+{
+"12
+[v ___aomod@sign sign `uc  1 a 1 17 ]
+[v ___aomod@counter counter `uc  1 a 1 16 ]
+"9
+[v ___aomod@dividend dividend `o  1 p 8 0 ]
+[v ___aomod@divisor divisor `o  1 p 8 8 ]
+"36
+} 0
+"9 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\aodiv.c
+[v ___aodiv __aodiv `(o  1 e 8 0 ]
+{
+"12
+[v ___aodiv@quotient quotient `o  1 a 8 18 ]
+"13
+[v ___aodiv@sign sign `uc  1 a 1 17 ]
+[v ___aodiv@counter counter `uc  1 a 1 16 ]
+"9
+[v ___aodiv@dividend dividend `o  1 p 8 0 ]
+[v ___aodiv@divisor divisor `o  1 p 8 8 ]
+"43
+} 0
+"7 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwmod@counter counter `uc  1 a 1 4 ]
+"7
+[v ___lwmod@dividend dividend `ui  1 p 2 0 ]
+[v ___lwmod@divisor divisor `ui  1 p 2 2 ]
+"25
 } 0
 "7 C:\Program Files (x86)\Microchip\xc8\v2.10\pic\sources\c99\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
@@ -450,4 +876,31 @@
 [v ___lwdiv@dividend dividend `ui  1 p 2 0 ]
 [v ___lwdiv@divisor divisor `ui  1 p 2 2 ]
 "30
+} 0
+"147 D:\scoala\electronica\induction motor control\control motor\lcd.c
+[v _LCDPutStr LCDPutStr `(v  1 e 1 0 ]
+{
+"148
+[v LCDPutStr@i i `uc  1 a 1 7 ]
+"147
+[v LCDPutStr@str str `*.39Cuc  1 p 2 5 ]
+"156
+} 0
+"119
+[v i1_LCDPutChar LCDPutChar `(v  1 e 1 0 ]
+{
+[v i1LCDPutChar@ch ch `uc  1 a 1 wreg ]
+[v i1LCDPutChar@ch ch `uc  1 a 1 wreg ]
+[v i1LCDPutChar@ch ch `uc  1 a 1 4 ]
+"130
+} 0
+"89
+[v i1_LCDWriteNibble LCDWriteNibble `(v  1 e 1 0 ]
+{
+[v i1LCDWriteNibble@ch ch `uc  1 a 1 wreg ]
+[v i1LCDWriteNibble@ch ch `uc  1 a 1 wreg ]
+[v i1LCDWriteNibble@rs rs `uc  1 p 1 0 ]
+"91
+[v i1LCDWriteNibble@ch ch `uc  1 a 1 2 ]
+"117
 } 0

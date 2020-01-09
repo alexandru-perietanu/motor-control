@@ -37,7 +37,7 @@
             
             for (var i = 1; i <= 100; i++) {
 
-                preloadHash[i] = Math.floor(65535 - (1 / (i * 0.0002)));
+                preloadHash[i] = Math.floor(65535 - (1 / (i * 0.0002048)));
 
                 let val =  Math.floor(map(i, 0, 99, minVal, maxVal));
                 frequenciesForPreload[val] = 1 / ((65535 - val) * 0.0002048);

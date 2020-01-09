@@ -677,8 +677,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lcd.c: 64:     PORTDbits.RD1 = 0;
 [e = . . _PORTDbits 0 1 -> -> 0 `i `uc ]
 "71
-[; ;lcd.c: 71:     _delay((unsigned long)((20)*(10000000/4000.0)));
-[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 10000000 `l `d .4000.0 `ul ]
+[; ;lcd.c: 71:     _delay((unsigned long)((20)*(40000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
 "74
 [; ;lcd.c: 74:     LCDPutCmd(0x32);
 [e ( _LCDPutCmd (1 -> -> 50 `i `uc ]
@@ -731,8 +731,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lcd.c: 113:     PORTCbits.RC1 = 1;
 [e = . . _PORTCbits 0 1 -> -> 1 `i `uc ]
 "114
-[; ;lcd.c: 114:     _delay((unsigned long)((1)*(10000000/4000000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 10000000 `l `d .4000000.0 `ul ]
+[; ;lcd.c: 114:     _delay((unsigned long)((1)*(40000000/4000000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000000.0 `ul ]
 "116
 [; ;lcd.c: 116:     PORTCbits.RC1 = 0;
 [e = . . _PORTCbits 0 1 -> -> 0 `i `uc ]
@@ -748,8 +748,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _ch `uc ~T0 @X0 1 r1 ]
 [f ]
 "120
-[; ;lcd.c: 120:     _delay((unsigned long)((5)*(10000000/4000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 10000000 `l `d .4000.0 `ul ]
+[; ;lcd.c: 120:     _delay((unsigned long)((5)*(40000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
 "123
 [; ;lcd.c: 123:     LCDWriteNibble(ch, 1);
 [e ( _LCDWriteNibble (2 , _ch -> -> 1 `i `uc ]
@@ -771,8 +771,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _ch `uc ~T0 @X0 1 r1 ]
 [f ]
 "133
-[; ;lcd.c: 133:     _delay((unsigned long)((5)*(10000000/4000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 10000000 `l `d .4000.0 `ul ]
+[; ;lcd.c: 133:     _delay((unsigned long)((5)*(40000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
 "136
 [; ;lcd.c: 136:     LCDWriteNibble(ch, 0);
 [e ( _LCDWriteNibble (2 , _ch -> -> 0 `i `uc ]
@@ -780,8 +780,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lcd.c: 139:     ch = (ch << 4);
 [e = _ch -> << -> _ch `i -> 4 `i `uc ]
 "141
-[; ;lcd.c: 141:     _delay((unsigned long)((1)*(10000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 10000000 `l `d .4000.0 `ul ]
+[; ;lcd.c: 141:     _delay((unsigned long)((1)*(40000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
 "144
 [; ;lcd.c: 144:     LCDWriteNibble(ch, 0);
 [e ( _LCDWriteNibble (2 , _ch -> -> 0 `i `uc ]
@@ -843,8 +843,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;lcd.c: 166:     LCDPutCmd((ln == 1) ? (0xC0 | pos) : (0x80 | pos));
 [e ( _LCDPutCmd (1 -> ? == -> _ln `i -> 1 `i : | -> 192 `i -> _pos `i | -> 128 `i -> _pos `i `uc ]
 "169
-[; ;lcd.c: 169:     _delay((unsigned long)((5)*(10000000/4000.0)));
-[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 10000000 `l `d .4000.0 `ul ]
+[; ;lcd.c: 169:     _delay((unsigned long)((5)*(40000000/4000.0)));
+[e ( __delay (1 -> * -> -> 5 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
 "170
 [; ;lcd.c: 170: }
 [e :UE 322 ]

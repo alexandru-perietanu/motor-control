@@ -5244,7 +5244,7 @@ void LCD_Initialize() {
 
 
 
-    _delay((unsigned long)((20)*(10000000/4000.0)));
+    _delay((unsigned long)((20)*(40000000/4000.0)));
 
 
     LCDPutCmd(0x32);
@@ -5280,13 +5280,13 @@ void LCDWriteNibble(uint8_t ch, uint8_t rs) {
 
 
     PORTCbits.RC1 = 1;
-    _delay((unsigned long)((1)*(10000000/4000000.0)));
+    _delay((unsigned long)((1)*(40000000/4000000.0)));
 
     PORTCbits.RC1 = 0;
 }
 
 void LCDPutChar(uint8_t ch) {
-    _delay((unsigned long)((5)*(10000000/4000.0)));
+    _delay((unsigned long)((5)*(40000000/4000.0)));
 
 
     LCDWriteNibble(ch, 1);
@@ -5299,7 +5299,7 @@ void LCDPutChar(uint8_t ch) {
 }
 
 void LCDPutCmd(uint8_t ch) {
-    _delay((unsigned long)((5)*(10000000/4000.0)));
+    _delay((unsigned long)((5)*(40000000/4000.0)));
 
 
     LCDWriteNibble(ch, 0);
@@ -5307,7 +5307,7 @@ void LCDPutCmd(uint8_t ch) {
 
     ch = (ch << 4);
 
-    _delay((unsigned long)((1)*(10000000/4000.0)));
+    _delay((unsigned long)((1)*(40000000/4000.0)));
 
 
     LCDWriteNibble(ch, 0);
@@ -5335,5 +5335,5 @@ void LCDGoto(uint8_t pos, uint8_t ln) {
     LCDPutCmd((ln == 1) ? (0xC0 | pos) : (0x80 | pos));
 
 
-    _delay((unsigned long)((5)*(10000000/4000.0)));
+    _delay((unsigned long)((5)*(40000000/4000.0)));
 }

@@ -101,6 +101,7 @@ const int sinusValues[256] = {960, 982, 1004, 1026, 1049, 1071, 1093, 1115, 1137
 64576, 64625, 64674, 64723, 64772, 64821, 64870, 64919, 64968, 65017,
 65066, 65115, 65164, 65213, 65262, 65311, 65360, 65409, 65458, 65508, 65508};
  */
+/*
 const unsigned int timer0PreloadValues[100] = {
     60652, 63093, 63907, 64314, 64558, 64721, 64837, 64924, 64992, 65046, 65091,
     65128, 65159, 65186, 65209, 65229, 65247, 65263, 65278, 65290, 65302, 65313,
@@ -112,7 +113,19 @@ const unsigned int timer0PreloadValues[100] = {
     65472, 65473, 65473, 65474, 65475, 65476, 65476, 65477, 65478, 65478, 65479,
     65480, 65480, 65481, 65481, 65482, 65483, 65483, 65484, 65484, 65485, 65485, 65486
 };
+ */
 
+const unsigned int timer0PreloadValues[100] = {
+    60656, 63095, 63908, 64315, 64559, 64721, 64838, 64925, 64992, 65047, 65091,
+    65128, 65159, 65186, 65209, 65230, 65248, 65263, 65278, 65291, 65302, 65313,
+    65322, 65331, 65339, 65347, 65354, 65360, 65366, 65372, 65377, 65382, 65387,
+    65391, 65395, 65399, 65403, 65406, 65409, 65413, 65416, 65418, 65421, 65424,
+    65426, 65428, 65431, 65433, 65435, 65437, 65439, 65441, 65442, 65444, 65446,
+    65447, 65449, 65450, 65452, 65453, 65455, 65456, 65457, 65458, 65459, 65461,
+    65462, 65463, 65464, 65465, 65466, 65467, 65468, 65469, 65469, 65470, 65471,
+    65472, 65473, 65474, 65474, 65475, 65476, 65476, 65477, 65478, 65478, 65479,
+    65480, 65480, 65481, 65481, 65482, 65483, 65484, 65485, 65486, 65487, 65487, 65488
+};
 const char digits[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 volatile unsigned int adcPercent = 65;
@@ -129,7 +142,7 @@ volatile char d1 = 1;
 //unsigned int timer0ReloadMax = 65508; // pt 100Hz
 unsigned int timer5ReloadValue = 3035;
 volatile char timer5OverflowCount = 0;
-volatile unsigned int timer0ReloadValue = 60535;
+volatile unsigned int timer0ReloadValue = 606523;
 volatile unsigned int prevTimer0ReloadValue = 60535;
 volatile unsigned char PrevADRESH = 65;
 volatile char refreshTime = 0;
@@ -137,6 +150,10 @@ volatile char currentPreloadIndex = 0;
 volatile char shouldUpdateDutyCycle = 0;
 volatile char shouldDisplay = 0;
 volatile char shouldUpdateTimer0Preload = 0;
+
+void display(void);
+void readADC(void);
+void updateTMR0PreloadValue(void);
 
 
 //void handleDisplay(void);
@@ -159,6 +176,10 @@ void configurePWM() {
      */
     PTCON0bits.PTMOD0 = 0;
     PTCON0bits.PTMOD1 = 0;
+    PTCON0bits.PTCKPS1 = 0;
+    PTCON0bits.PTCKPS0 = 1;
+
+
 
     /*PTCON1: PWM TIMER CONTROL REGISTER 1*/
     /*
@@ -173,6 +194,7 @@ void configurePWM() {
 
     PTCON1bits.PTEN = 0;
     PTCON1bits.PTDIR = 0;
+
 
 
     /*PWMCON0: PWM CONTROL REGISTER 0*/
@@ -308,6 +330,7 @@ void configureADC() {
     // Fosc / 64
     ADCON2bits.ADCS2 = 1;
     ADCON2bits.ADCS1 = 1;
+    ADCON2bits.ADFM = 0;
 
     //An interrupt is generated on every 2nd and 4th write to the FIFO buffer.
     ADCON3bits.ADRS1 = 1;
@@ -335,9 +358,9 @@ void configureTimer0() {
     T0CONbits.T0CS = 0;
     T0CONbits.T016BIT = 0;
     T0CONbits.TMR0ON = 1;
-    T0CONbits.T0PS0 = 0;
-    T0CONbits.T0PS1 = 1;
-    T0CONbits.T0PS2 = 0;
+    T0CONbits.T0PS0 = 1;
+    T0CONbits.T0PS1 = 0;
+    T0CONbits.T0PS2 = 1;
     INTCONbits.TMR0IE = 1;
     INTCON2bits.TMR0IP = 0;
     //TMR0 = timer0ReloadValue;
@@ -364,6 +387,14 @@ void configureTimer5() {
     TMR5 = timer5ReloadValue;
 }
 
+void configureInputs() {
+    TRISAbits.TRISA1 = 1;
+    ANSEL0bits.ANS1 = 0;
+    
+    TRISAbits.TRISA3 = 1;
+    ANSEL0bits.ANS3 = 0;
+}
+
 void main(void) {
     LCD_Initialize();
     configureInterrupts();
@@ -372,128 +403,79 @@ void main(void) {
     configureTimer0();
     configureTimer1();
     configureTimer5();
+    configureInputs();
     startPWM();
-
-    //DisplayClr();
-    ///LCDPutStr("aaaa");
-
-
 
     TRISAbits.TRISA2 = 0;
     TRISAbits.RA2 = 0;
     ANSEL0bits.ANS2 = 0;
     PORTAbits.RA2 = 0;
-    //timer0ReloadValue = timer0PreloadValues[50];
 
     //stopPWM();
     NOP();
-    //LCDPutChar('a');
     while (1) {
         NOP();
-        //shouldUpdateDutyCycle = 0;
-        if (shouldUpdateDutyCycle) {
-            if (sinusIndex1 == 255) {
-                sinusIndex1 = 0;
-            }
-            if (sinusIndex2 == 255) {
-                sinusIndex2 = 0;
-            }
-            if (sinusIndex3 == 255) {
-                sinusIndex3 = 0;
-            }
-
-            //dutyCycle = sinusVales[sinusIndex] * (1900 - 13) / 255 + 13;
-            unsigned char duty = (sinusValues[sinusIndex1] >> 8);
-            PDC0H = duty;
-            PDC0L = sinusValues[sinusIndex1];
-
-            duty = (sinusValues[sinusIndex2] >> 8);
-            PDC1H = duty;
-            PDC1L = sinusValues[sinusIndex2];
-
-            duty = (sinusValues[sinusIndex3] >> 8);
-            PDC2H = duty;
-            PDC2L = sinusValues[sinusIndex3];
-
-
-            //TMR0 = timer0ReloadValue;
-
-            //        PORTDbits.RD1 = d1;
-            //        d1 = !d1;
-
-            sinusIndex1++;
-            sinusIndex2++;
-            sinusIndex3++;
-            shouldUpdateDutyCycle = 0;
-        }
-        //shouldDisplay = 0;
-        if (shouldDisplay) {
-            if (refreshTime == 5) {
-                if (prevAdcPercent != adcPercent || prevTimer0ReloadValue != timer0ReloadValue) {
-
-                    char str1[16];
-                    char str2[16];
-
-                    DisplayClr();
-                    sprintf(str1, "%d", adcPercent);
-                    LCDPutStr(str1);
-                    LCDPutChar(' ');
-
-                    unsigned int timer0ReloadValueCopy = timer0ReloadValue;
-                    char noDigits = 0;
-                    while (timer0ReloadValueCopy > 0) {
-                        str2[noDigits] = timer0ReloadValueCopy % 10;
-                        timer0ReloadValueCopy /= 10;
-                        noDigits++;
-                    }
-                    for (int i = noDigits - 1; i >= 0; i--) {
-                        LCDPutChar(digits[str2[i]]);
-                    }
-                    //shouldDisplay = 0;
-                }
-                refreshTime = 0;
-            } 
-            refreshTime++;
-            prevAdcPercent = adcPercent;
-            prevTimer0ReloadValue = timer0ReloadValue;
-            shouldDisplay = 0;
+        display();
+        updateTMR0PreloadValue();
+        readADC();
+        
+//        if (PORTAbits.RA1 == 1) {
+//            PORTAbits.RA2 = 1;
+//            //d1 = !d1;
+//        } else {
+//            PORTAbits.RA2 = 0;
+//        }
+        
+        if (PORTAbits.RA3 == 1) {
+            PORTAbits.RA2 = 1;
+            //d1 = !d1;
+        } else {
+            PORTAbits.RA2 = 0;
         }
 
-        if (shouldUpdateTimer0Preload) {
-            if (timer5OverflowCount == 2) {
-                timer5OverflowCount = 0;
-                if (currentPreloadIndex < adcPercent) {
-                    currentPreloadIndex++;
-                } else if (currentPreloadIndex > adcPercent) {
-                    currentPreloadIndex--;
-                }
-                timer0ReloadValue = timer0PreloadValues[currentPreloadIndex];
-            }
-            timer5OverflowCount++;
-            shouldUpdateTimer0Preload = 0;
-        }
-
-        if (PIR1bits.ADIF == 1) {
-            if (PrevADRESH != ADRESH) {
-                adcPercent = (255 - ADRESH) * 99 / maxADCVal; //
-                //timer0ReloadValue = timer0PreloadValues[adcPercent];
-            }
-            PrevADRESH = ADRESH;
-            PIR1bits.ADIF = 0;
-        }
     }
 
     return;
 }
 
 void __interrupt(low_priority) tcInt(void) {
+    //    PORTAbits.RA2 = d1;
+    //    d1 = !d1;
     if (INTCONbits.TMR0IF) {
         INTCONbits.TMR0IF = 0;
         shouldUpdateDutyCycle = 1;
-        //PORTAbits.RA4 = 1;
+        //        if (shouldUpdateDutyCycle) {
+        //        if (sinusIndex1 == 255) {
+        //            sinusIndex1 = 0;
+        //        }
+        //        if (sinusIndex2 == 255) {
+        //            sinusIndex2 = 0;
+        //        }
+        //        if (sinusIndex3 == 255) {
+        //            sinusIndex3 = 0;
+        //        }
+        PWMCON1bits.UDIS = 1;
+        //dutyCycle = sinusVales[sinusIndex] * (1900 - 13) / 255 + 13;
+
+        unsigned char duty = (sinusValues[sinusIndex1] >> 8);
+        PDC0H = duty;
+        PDC0L = sinusValues[sinusIndex1];
+
+        duty = (sinusValues[sinusIndex2] >> 8);
+        PDC1H = duty;
+        PDC1L = sinusValues[sinusIndex2];
+
+        duty = (sinusValues[sinusIndex3] >> 8);
+        PDC2H = duty;
+        PDC2L = sinusValues[sinusIndex3];
+        PWMCON1bits.UDIS = 0;
+
+        sinusIndex1 += 8;
+        sinusIndex2 += 8;
+        sinusIndex3 += 8;
+        TMR0 = timer0ReloadValue;
         //PORTAbits.RA2 = d1;
         //d1 = !d1;
-        TMR0 = timer0ReloadValue;
     }
 
     if (PIR1bits.TMR1IF) {
@@ -511,5 +493,65 @@ void __interrupt(low_priority) tcInt(void) {
         //        PORTAbits.RA2 = d1;
         //        d1 = !d1;
     }
+}
 
+void display() {
+    if (shouldDisplay) {
+        if (refreshTime == 5) {
+            if (prevAdcPercent != adcPercent || prevTimer0ReloadValue != timer0ReloadValue) {
+
+                char str1[16];
+                char str2[16];
+
+                DisplayClr();
+                sprintf(str1, "%d", adcPercent);
+                LCDPutStr(str1);
+                LCDPutChar(' ');
+
+                unsigned int timer0ReloadValueCopy = timer0ReloadValue;
+                char noDigits = 0;
+                while (timer0ReloadValueCopy > 0) {
+                    str2[noDigits] = timer0ReloadValueCopy % 10;
+                    timer0ReloadValueCopy /= 10;
+                    noDigits++;
+                }
+                for (int i = noDigits - 1; i >= 0; i--) {
+                    LCDPutChar(digits[str2[i]]);
+                }
+                //shouldDisplay = 0;
+            }
+            refreshTime = 0;
+        }
+        refreshTime++;
+        prevAdcPercent = adcPercent;
+        prevTimer0ReloadValue = timer0ReloadValue;
+        shouldDisplay = 0;
+    }
+}
+
+void updateTMR0PreloadValue() {
+    if (shouldUpdateTimer0Preload) {
+        if (timer5OverflowCount == 1) {
+            timer5OverflowCount = 0;
+            if (currentPreloadIndex < adcPercent) {
+                currentPreloadIndex++;
+            } else if (currentPreloadIndex > adcPercent) {
+                currentPreloadIndex--;
+            }
+            timer0ReloadValue = timer0PreloadValues[currentPreloadIndex];
+        }
+        timer5OverflowCount++;
+        shouldUpdateTimer0Preload = 0;
+    }
+}
+
+void readADC() {
+    if (PIR1bits.ADIF == 1) {
+        if (PrevADRESH != ADRESH) {
+            adcPercent = (255 - ADRESH) * 99 / maxADCVal; //
+            //timer0ReloadValue = timer0PreloadValues[adcPercent];
+        }
+        PrevADRESH = ADRESH;
+        PIR1bits.ADIF = 0;
+    }
 }

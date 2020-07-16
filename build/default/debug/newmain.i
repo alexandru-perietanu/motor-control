@@ -23,9 +23,9 @@
 #pragma config WINEN = OFF
 
 
-#pragma config PWMPIN = OFF
-#pragma config LPOL = LOW
-#pragma config HPOL = LOW
+#pragma config PWMPIN = ON
+#pragma config LPOL = HIGH
+#pragma config HPOL = HIGH
 #pragma config T1OSCMX = ON
 
 
@@ -5431,19 +5431,11 @@ char *tempnam(const char *, const char *);
 
 
 
-const int sinusValues[256] = {960, 982, 1004, 1026, 1049, 1071, 1093, 1115, 1137, 1160, 1182, 1211, 1234, 1248, 1271, 1293, 1315, 1337, 1359, 1382, 1404, 1419, 1441, 1463, 1478, 1500, 1515, 1537, 1552, 1574, 1589, 1604, 1626, 1641, 1655, 1670, 1685, 1700, 1715, 1729, 1737, 1752, 1766, 1774, 1789, 1796, 1811, 1818, 1826, 1833, 1840, 1848, 1855, 1863, 1870, 1877, 1877, 1885, 1885, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1892, 1885, 1885, 1877, 1877, 1870, 1863, 1863, 1855, 1848, 1840, 1833, 1818, 1811, 1803, 1789, 1781, 1766, 1759, 1744, 1729, 1722, 1707, 1692, 1678, 1663, 1648, 1633, 1611, 1596, 1581, 1567, 1544, 1530, 1507, 1493, 1470, 1448, 1433, 1411, 1389, 1367, 1352, 1330, 1308, 1285, 1263, 1241, 1219, 1197, 1174, 1152, 1130, 1108, 1086, 1063, 1034, 1012, 989, 967, 945, 923, 901, 878, 849, 827, 804, 782, 760, 738, 716, 693, 671, 649, 627, 605, 582, 560, 545, 523, 501, 479, 464, 442, 420, 405, 383, 368, 346, 331, 316, 301, 279, 264, 249, 235, 220, 205, 190, 183, 168, 153, 146, 131, 124, 109, 101, 94, 79, 72, 64, 57, 50, 50, 42, 35, 35, 27, 27, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 27, 27, 35, 35, 42, 50, 57, 64, 72, 79, 87, 94, 101, 116, 124, 138, 146, 161, 175, 183, 198, 212, 227, 242, 257, 272, 286, 309, 323, 338, 360, 375, 397, 412, 434, 449, 471, 494, 508, 531, 553, 575, 597, 619, 642, 664, 679, 701, 730, 753, 775, 797, 819, 841, 864, 886, 908, 930, 952};
-# 118 "newmain.c"
-const unsigned int timer0PreloadValues[100] = {
-    60656, 63095, 63908, 64315, 64559, 64721, 64838, 64925, 64992, 65047, 65091,
-    65128, 65159, 65186, 65209, 65230, 65248, 65263, 65278, 65291, 65302, 65313,
-    65322, 65331, 65339, 65347, 65354, 65360, 65366, 65372, 65377, 65382, 65387,
-    65391, 65395, 65399, 65403, 65406, 65409, 65413, 65416, 65418, 65421, 65424,
-    65426, 65428, 65431, 65433, 65435, 65437, 65439, 65441, 65442, 65444, 65446,
-    65447, 65449, 65450, 65452, 65453, 65455, 65456, 65457, 65458, 65459, 65461,
-    65462, 65463, 65464, 65465, 65466, 65467, 65468, 65469, 65469, 65470, 65471,
-    65472, 65473, 65474, 65474, 65475, 65476, 65476, 65477, 65478, 65478, 65479,
-    65480, 65480, 65481, 65481, 65482, 65483, 65484, 65485, 65486, 65487, 65487, 65488
-};
+const unsigned int sinusValues[256] = {1028, 1052, 1076, 1100, 1124, 1148, 1172, 1196, 1220, 1244, 1268, 1301, 1325, 1341, 1365, 1389, 1413, 1437, 1461, 1485, 1509, 1525, 1550, 1574, 1590, 1614, 1630, 1654, 1670, 1694, 1710, 1726, 1750, 1766, 1782, 1799, 1815, 1831, 1847, 1863, 1871, 1887, 1903, 1911, 1927, 1935, 1951, 1959, 1967, 1975, 1983, 1991, 1999, 2007, 2015, 2023, 2023, 2031, 2031, 2039, 2039, 2039, 2039, 2039, 2039, 2039, 2039, 2039, 2039, 2031, 2031, 2023, 2023, 2015, 2007, 2007, 1999, 1991, 1983, 1975, 1959, 1951, 1943, 1927, 1919, 1903, 1895, 1879, 1863, 1855, 1839, 1823, 1807, 1790, 1774, 1758, 1734, 1718, 1702, 1686, 1662, 1646, 1622, 1606, 1582, 1558, 1542, 1517, 1493, 1469, 1453, 1429, 1405, 1381, 1357, 1333, 1309, 1285, 1260, 1236, 1212, 1188, 1164, 1140, 1108, 1084, 1060, 1036, 1011, 987, 963, 939, 907, 883, 859, 835, 811, 787, 762, 738, 714, 690, 666, 642, 618, 594, 578, 554, 530, 505, 489, 465, 441, 425, 401, 385, 361, 345, 329, 313, 289, 273, 257, 240, 224, 208, 192, 184, 168, 152, 144, 128, 120, 104, 96, 88, 72, 64, 56, 48, 40, 40, 32, 24, 24, 16, 16, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 16, 16, 24, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 112, 120, 136, 144, 160, 176, 184, 200, 216, 232, 248, 265, 281, 297, 321, 337, 353, 377, 393, 417, 433, 457, 473, 497, 522, 538, 562, 586, 610, 634, 658, 682, 706, 722, 746, 779, 803, 827, 851, 875, 899, 923, 947, 971, 995, 1019};
+const unsigned int scaleFactor[50] = {64, 63, 62, 61, 60, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 14, 13, 12, 11, 10};
+
+volatile unsigned char skipValue = 1;
+const unsigned int timer0PreloadValues[100] = {55769, 60652, 62280, 63094, 63582, 63907, 64140, 64314, 64450, 64558, 64647, 64721, 64784, 64837, 64884, 64925, 64961, 64992, 65021, 65047, 65070, 65091, 65110, 65128, 65144, 65159, 65173, 65186, 65198, 65209, 65220, 65230, 65239, 65248, 65256, 65264, 65271, 65278, 65285, 65291, 65297, 65302, 65308, 65313, 65318, 65323, 65327, 65332, 65336, 65340, 65344, 65347, 65351, 65354, 65357, 65361, 65364, 65367, 65369, 65372, 65375, 65377, 65380, 65382, 65385, 65387, 65389, 65391, 65393, 65395, 65397, 65399, 65401, 65403, 65405, 65407, 65408, 65410, 65411, 65413, 65414, 65416, 65417, 65419, 65420, 65421, 65423, 65424, 65425, 65426, 65428, 65429, 65430, 65431, 65432, 65436, 65437, 65438, 65439, 65440};
 const char digits[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
 volatile unsigned int adcPercent = 65;
@@ -5453,14 +5445,15 @@ volatile unsigned long dutyCycle = 0;
 volatile unsigned char sinusIndex1 = 0;
 volatile unsigned char sinusIndex2 = 85;
 volatile unsigned char sinusIndex3 = 170;
+volatile unsigned int sinusValue1 = 0;
+volatile unsigned int sinusValue2 = 85;
+volatile unsigned int sinusValue3 = 170;
 volatile char d1 = 1;
-
-
 
 
 unsigned int timer5ReloadValue = 3035;
 volatile char timer5OverflowCount = 0;
-volatile unsigned int timer0ReloadValue = 606523;
+volatile unsigned int timer0ReloadValue = 60652;
 volatile unsigned int prevTimer0ReloadValue = 60535;
 volatile unsigned char PrevADRESH = 65;
 volatile char refreshTime = 0;
@@ -5469,29 +5462,32 @@ volatile char shouldUpdateDutyCycle = 0;
 volatile char shouldDisplay = 0;
 volatile char shouldUpdateTimer0Preload = 0;
 
+
+volatile unsigned char counter = 0;
+
 void display(void);
 void readADC(void);
 void updateTMR0PreloadValue(void);
-
-
-
-
-
-
+void updateSinusIndexes(void);
 
 void configurePWM() {
     LATB = 0;
     TRISB = 0;
     PORTB = 0;
-# 177 "newmain.c"
+
+
     PTCON0bits.PTMOD0 = 0;
     PTCON0bits.PTMOD1 = 0;
     PTCON0bits.PTCKPS1 = 0;
-    PTCON0bits.PTCKPS0 = 1;
-# 195 "newmain.c"
+    PTCON0bits.PTCKPS0 = 0;
+    PTCON0bits.PTOPS0 = 0;
+    PTCON0bits.PTOPS1 = 0;
+    PTCON0bits.PTOPS2 = 0;
+    PTCON0bits.PTOPS3 = 0;
+# 156 "newmain.c"
     PTCON1bits.PTEN = 0;
     PTCON1bits.PTDIR = 0;
-# 224 "newmain.c"
+
     PWMCON0bits.PWMEN2 = 1;
     PWMCON0bits.PWMEN1 = 0;
     PWMCON0bits.PWMEN0 = 0;
@@ -5514,17 +5510,16 @@ void configurePWM() {
 
     PTPERH = 0x01;
     PTPERL = 0xF3;
-
-
-
-
-
-    PDC0H = 0x00;
-    PDC0L = 0x13;
-# 262 "newmain.c"
+# 191 "newmain.c"
     OVDCOND = 0xff;
-# 272 "newmain.c"
+# 201 "newmain.c"
     OVDCONS = 0;
+
+
+    DTCONbits.DTPS1 = 0;
+    DTCONbits.DTPS0 = 0;
+    DTCON |= 40;
+
 }
 
 void startPWM() {
@@ -5535,21 +5530,9 @@ void stopPWM() {
     PTCON1bits.PTEN = 0;
 }
 
-
-
-
-
 void configureInterrupts() {
-# 307 "newmain.c"
     INTCONbits.GIE = 1;
     INTCONbits.PEIE = 1;
-
-
-
-
-
-
-
 }
 
 void configureADC() {
@@ -5596,8 +5579,8 @@ void configureTimer0() {
     T0CONbits.T016BIT = 0;
     T0CONbits.TMR0ON = 1;
     T0CONbits.T0PS0 = 1;
-    T0CONbits.T0PS1 = 0;
-    T0CONbits.T0PS2 = 1;
+    T0CONbits.T0PS1 = 1;
+    T0CONbits.T0PS2 = 0;
     INTCONbits.TMR0IE = 1;
     INTCON2bits.TMR0IP = 0;
 
@@ -5632,6 +5615,16 @@ void configureInputs() {
     ANSEL0bits.ANS3 = 0;
 }
 
+void configureTimer2() {
+    T2CONbits.T2CKPS1 = 0;
+    T2CONbits.T2CKPS1 = 1;
+
+    T2CONbits.TMR2ON = 1;
+    PIE1bits.TMR2IE = 1;
+    TMR2 = 230;
+
+}
+
 void main(void) {
     LCD_Initialize();
     configureInterrupts();
@@ -5639,6 +5632,7 @@ void main(void) {
     configureADC();
     configureTimer0();
     configureTimer1();
+    configureTimer2();
     configureTimer5();
     configureInputs();
     startPWM();
@@ -5652,16 +5646,24 @@ void main(void) {
     __nop();
     while (1) {
         __nop();
+
+
+
+
+
+
         display();
         updateTMR0PreloadValue();
         readADC();
-# 429 "newmain.c"
+# 351 "newmain.c"
         if (PORTAbits.RA3 == 1) {
-            PORTAbits.RA2 = 1;
+
 
         } else {
-            PORTAbits.RA2 = 0;
+
         }
+
+
 
     }
 
@@ -5671,39 +5673,45 @@ void main(void) {
 void __attribute__((picinterrupt(("low_priority")))) tcInt(void) {
 
 
+
+
+
+
     if (INTCONbits.TMR0IF) {
+# 383 "newmain.c"
         INTCONbits.TMR0IF = 0;
-        shouldUpdateDutyCycle = 1;
-# 457 "newmain.c"
+
         PWMCON1bits.UDIS = 1;
-
-
-        unsigned char duty = (sinusValues[sinusIndex1] >> 8);
+        unsigned char duty = (sinusValue1 >> 8);
         PDC0H = duty;
-        PDC0L = sinusValues[sinusIndex1];
+        PDC0L = sinusValue1;
 
-        duty = (sinusValues[sinusIndex2] >> 8);
+        duty = (sinusValue2 >> 8);
         PDC1H = duty;
-        PDC1L = sinusValues[sinusIndex2];
+        PDC1L = sinusValue2;
 
-        duty = (sinusValues[sinusIndex3] >> 8);
+        duty = (sinusValue3 >> 8);
         PDC2H = duty;
-        PDC2L = sinusValues[sinusIndex3];
+        PDC2L = sinusValue3;
         PWMCON1bits.UDIS = 0;
 
-        sinusIndex1 += 8;
-        sinusIndex2 += 8;
-        sinusIndex3 += 8;
+        sinusIndex1 += 4;
+        sinusIndex2 += 4;
+        sinusIndex3 += 4;
+
         TMR0 = timer0ReloadValue;
 
 
     }
 
     if (PIR1bits.TMR1IF) {
+
         PIR1bits.TMR1IF = 0;
         TMR1 = 0;
 
         shouldDisplay = 1;
+
+
 
     }
 
@@ -5714,17 +5722,34 @@ void __attribute__((picinterrupt(("low_priority")))) tcInt(void) {
 
 
     }
+
+    if (PIR1bits.TMR2IF) {
+        PORTAbits.RA2 = d1;
+        d1 = !d1;
+        updateSinusIndexes();
+        PIR1bits.TMR2IF = 0;
+        TMR2 = 230;
+    }
+
+
+
+
+
 }
 
 void display() {
     if (shouldDisplay) {
-        if (refreshTime == 5) {
-            if (prevAdcPercent != adcPercent || prevTimer0ReloadValue != timer0ReloadValue) {
+        if (refreshTime == 10) {
+            if (currentPreloadIndex != adcPercent || prevTimer0ReloadValue != timer0ReloadValue || prevAdcPercent != adcPercent) {
 
                 char str1[16];
                 char str2[16];
+                char str3[16];
 
                 LCDPutCmd(0x01);
+                sprintf(str3, "%d", currentPreloadIndex);
+                LCDPutStr(str3);
+                LCDPutChar(' ');
                 sprintf(str1, "%d", adcPercent);
                 LCDPutStr(str1);
                 LCDPutChar(' ');
@@ -5742,10 +5767,11 @@ void display() {
 
             }
             refreshTime = 0;
+            prevAdcPercent = adcPercent;
+            prevTimer0ReloadValue = timer0ReloadValue;
         }
         refreshTime++;
-        prevAdcPercent = adcPercent;
-        prevTimer0ReloadValue = timer0ReloadValue;
+
         shouldDisplay = 0;
     }
 }
@@ -5774,5 +5800,21 @@ void readADC() {
         }
         PrevADRESH = ADRESH;
         PIR1bits.ADIF = 0;
+    }
+}
+
+void updateSinusIndexes() {
+    int currentScalefactor = scaleFactor[currentPreloadIndex];
+    if (currentPreloadIndex < 50) {
+        sinusValue1 = (sinusValues[sinusIndex1] << 3) / currentScalefactor;
+        sinusValue2 = (sinusValues[sinusIndex2] << 3) / currentScalefactor;
+        sinusValue3 = (sinusValues[sinusIndex3] << 3) / currentScalefactor;
+        sinusValue1 = sinusValue1 < 8 ? 8 : sinusValue1;
+        sinusValue2 = sinusValue2 < 8 ? 8 : sinusValue2;
+        sinusValue3 = sinusValue3 < 8 ? 8 : sinusValue3;
+    } else {
+        sinusValue1 = sinusValues[sinusIndex1];
+        sinusValue2 = sinusValues[sinusIndex2];
+        sinusValue3 = sinusValues[sinusIndex3];
     }
 }
